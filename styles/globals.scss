@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "Segoe UI Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Regular"),
+    url("../public/assets/kits/fonts/Segoe UI.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe UI Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Italic"),
+    url("../public/assets/kits/fonts/Segoe UI Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe UI Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Bold"),
+    url("../public/assets/kits/fonts/Segoe UI Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Segoe UI Bold Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Segoe UI Bold Italic"),
+    url("../public/assets/kits/fonts/Segoe UI Bold Italic.woff") format("woff");
+}
+body {
+  font-family: "Segoe UI Regular" !important;
+  background-color: #fbfcff !important;
+}
+.row {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.row > * {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.loading {
+  .logo {
+    width: 50%;
+    height: auto;
+    @media (min-width: 700px) {
+      width: 25%;
+    }
+  }
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+
+  &.show {
+    margin-left: 206px;
+  }
+  &.fixed {
+    margin-left: 72px;
+  }
+}
