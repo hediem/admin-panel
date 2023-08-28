@@ -1,22 +1,78 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Metadata } from "next";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+
 import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
 import "../login-styles.scss";
 import ColorSchema from "@/public/assets/kits/colors";
-import Link from "next/link";
-import { Metadata } from "next";
+
 type Inputs = {
   email: string;
   password: string;
+};
+type Users = {
+  email: string;
+  password: string;
+  id: string;
 };
 export const metadata: Metadata = {
   title: "Sign up",
 };
 
 const SignUp = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
+
+  const handleCheckUser = async (data: Inputs) => {
+    const response = await fetch("http://localhost:8000/users");
+    const users = await response.json();
+
+    const userExists = users.some((user: Users) => user.email === data.email);
+    return userExists;
+  };
+
+  const handleSignUp = async (data: Inputs) => {
+    const response = await fetch("http://localhost:8000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: data.email, password: data.password }),
+    });
+    // const token = generateToken(data);
+    if (response.ok) {
+      // localStorage.setItem("token", token);
+      toast.success("Sign up successful", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      router.push("/", { scroll: false });
+      // Handle successful sign-up, such as redirecting to another page
+    } else {
+      toast.error("Sign up failed", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // Handle sign-up error
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -31,7 +87,21 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (isFormDataFilled) {
-      console.log(data);
+      const userExists = handleCheckUser(data);
+      if (await userExists) {
+        toast.error("User already exists", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        return;
+      }
+      handleSignUp(data);
     }
   };
   return (
@@ -131,6 +201,7 @@ const SignUp = () => {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

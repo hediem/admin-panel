@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import AdminPanelContext from "@/context/AdminPanelContext";
+import { usePathname } from "next/navigation";
 
 import { Breadcrumb, Image } from "react-bootstrap";
 import ColorSchema from "@/public/assets/kits/colors";
@@ -16,10 +17,24 @@ import profile from "../../public/assets/images/profile.svg";
 import close from "../../public/assets/icons/Dismiss.svg";
 
 import "./layout.scss";
-import Link from "next/link";
 
 const Header = () => {
-  const { show, setShow, width } = useContext(AdminPanelContext);
+  const { show, setShow, width, setShowBackDrop } =
+    useContext(AdminPanelContext);
+  const path = usePathname();
+  const pathSegments = path.split("/");
+  const links = [];
+  const formattedPathSegments = pathSegments.map((segment, index) => {
+    const words = segment.split("-");
+    const formattedWords = words.map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+    links.push(segment);
+    return {
+      real: links.join("/"),
+      format: formattedWords.join(""),
+    };
+  });
 
   return (
     <div
@@ -36,8 +51,22 @@ const Header = () => {
         {show && width > 991 ? (
           ""
         ) : (
-          <div onClick={(e) => setShow(true)} style={{ cursor: "pointer" }}>
-            <AiOutlineMenu style={{ width: "24px", height: "24px" }} />
+          <div
+            onClick={(e) => {
+              setShow(true);
+              if (width <= 991) {
+                setShowBackDrop(true);
+              }
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <AiOutlineMenu
+              style={{
+                width: "24px",
+                height: "24px",
+                color: ColorSchema.theme_primary,
+              }}
+            />
           </div>
         )}
 
@@ -49,18 +78,24 @@ const Header = () => {
           className="logo d-lg-none"
         />
         <Breadcrumb
-          separator=">"
           className={`d-none d-md-block ${show && width > 991 ? "ps-5" : ""}`}
         >
-          <Breadcrumb.Item>
-            <Link href="/">Home</Link>
-          </Breadcrumb.Item>
-          <span className="mx-3">{">"}</span>
-          <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-            Library
-          </Breadcrumb.Item>
-          <span className="mx-3">{">"}</span>
-          <Breadcrumb.Item active>Data</Breadcrumb.Item>
+          {formattedPathSegments[1].real !== "/" ? (
+            formattedPathSegments.map((val, index) => {
+              return (
+                <div key={index} className="d-flex align-items-center">
+                  <Breadcrumb.Item href={`${val.real}`}>
+                    {val.format === "" ? "Home" : val.format}
+                  </Breadcrumb.Item>
+                  {index !== formattedPathSegments.length - 1 && (
+                    <span className="mx-3">{">"}</span>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          )}
         </Breadcrumb>
       </div>
       <div
@@ -106,7 +141,13 @@ const Header = () => {
             ""
           )}
           {show ? (
-            <div className="closebtn" onClick={(e) => setShow(false)}>
+            <div
+              className="closebtn"
+              onClick={(e) => {
+                setShow(false);
+                setShowBackDrop(false);
+              }}
+            >
               <Image src={close.src} alt="close" width={24} height={24} />
             </div>
           ) : (

@@ -2,6 +2,8 @@ import React from "react";
 import "@/styles/globals.scss";
 import "@/public/assets/kits/colors/colors.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "react-toastify/dist/ReactToastify.css";
+
 import type { Metadata } from "next";
 import { AdminPanelContextProvider } from "@/context/AdminPanelContext";
 export const metadata: Metadata = {

@@ -36,6 +36,7 @@ type StyleType = {
   grey50: string;
   grey60: string;
   grey90: string;
+  grey110: string;
   grey130: string;
   grey150: string;
   grey160: string;
@@ -80,6 +81,7 @@ const ColorSchema: StyleType = {
   grey50: "var(--grey50)",
   grey60: "var(--grey60)",
   grey90: "var(--grey90)",
+  grey110: "var(--grey110)",
   grey130: "var(--grey130)",
   grey150: "var(--grey150)",
   grey160: "var(--grey160)",

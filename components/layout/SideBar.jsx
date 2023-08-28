@@ -6,9 +6,10 @@ import Arrow from "../../public/assets/icons/Arrow-down.svg";
 import Image from "next/image";
 import Link from "next/link";
 import AdminPanelContext from "@/context/AdminPanelContext";
+import { usePathname } from "next/navigation";
 const SideBar = () => {
   const { width, show } = useContext(AdminPanelContext);
-
+  const path = usePathname();
   return (
     <div className="sidebar">
       {width > 991 && !show ? (
@@ -33,7 +34,12 @@ const SideBar = () => {
               />
             </Accordion.Header>
             <Accordion.Body>
-              <Link href={"/analysis"} className="body-item">
+              <Link
+                href={"/analysis"}
+                className={`body-item ${
+                  path.includes("analysis") && "selected"
+                }`}
+              >
                 Analysis
               </Link>
             </Accordion.Body>
@@ -53,10 +59,20 @@ const SideBar = () => {
               />
             </Accordion.Header>
             <Accordion.Body>
-              <Link href={"/products"} className="body-item">
+              <Link
+                href={"/products"}
+                className={`body-item ${
+                  path.includes("products") && "selected"
+                }`}
+              >
                 Products
               </Link>
-              <Link href={"/categories"} className="body-item">
+              <Link
+                href={"/categories"}
+                className={`body-item ${
+                  path.includes("categories") && "selected"
+                }`}
+              >
                 Categories
               </Link>
             </Accordion.Body>

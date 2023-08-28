@@ -18,7 +18,7 @@ const Footer = () => {
       <div className="w-100 d-flex d-sm-none flex-row align-items-center justify-content-between">
         <div className="col-6">
           <div className="d-flex flex-column align-items-start justify-content-start">
-            <div>Made with ❤ by Hediem</div>
+            <div>Made with ❤️ by Hediem</div>
             <Link href={"https://github.com/hediem"} className="link">
               github.com/hediem
             </Link>
@@ -37,9 +37,12 @@ const Footer = () => {
           <div className="icon">
             <Image src={Frame} alt="Frame" width={13} height={13} />
           </div>
-          <div className="icon">
+          <Link
+            href={"https://www.linkedin.com/in/hediehmoshtaghi"}
+            className="icon"
+          >
             <Image src={Linkedin} alt="Linkedin" width={13} height={13} />
-          </div>
+          </Link>
         </div>
       </div>
       <div className="w-100 d-none d-sm-flex flex-row align-items-center justify-content-between">
@@ -55,15 +58,18 @@ const Footer = () => {
           <div className="icon">
             <Image src={Twitter} alt="Twitter" width={13} height={13} />
           </div>
-          <div className="icon">
+          <Link href="https://github.com/hediem" className="icon">
             <Image src={GitHub} alt="GitHub" width={13} height={13} />
-          </div>
+          </Link>
           <div className="icon">
             <Image src={Frame} alt="Frame" width={13} height={13} />
           </div>
-          <div className="icon">
+          <Link
+            href={"https://www.linkedin.com/in/hediehmoshtaghi"}
+            className="icon"
+          >
             <Image src={Linkedin} alt="Linkedin" width={13} height={13} />
-          </div>
+          </Link>
         </div>
         <div className="col-4  d-flex align-items-center justify-content-center">
           Made with ❤ by Hediem

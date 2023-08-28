@@ -1,21 +1,90 @@
 "use client";
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
-import "../login-styles.scss";
-import ColorSchema from "@/public/assets/kits/colors";
 import Link from "next/link";
 import { Metadata } from "next";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
+
+import "../login-styles.scss";
+import ColorSchema from "@/public/assets/kits/colors";
+import { useRouter } from "next/navigation";
 type Inputs = {
   email: string;
   password: string;
+};
+type Users = {
+  email: string;
+  password: string;
+  id: string;
 };
 export const metadata: Metadata = {
   title: "Sign in",
 };
 const SignIn = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async (data: Inputs) => {
+    const response = await fetch("http://localhost:8000/users", {
+      method: "GET",
+    });
+    const users = await response.json();
+
+    const user = users.find(
+      (u: Users) => u.email === data.email && u.password === data.password
+    );
+    const falsePass = users.find(
+      (u: Users) => u.email === data.email && u.password !== data.password
+    );
+    // const token = generateToken(data);
+
+    if (user) {
+      // localStorage.setItem("token", token);
+      toast.success("Sign in successful", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      router.push("/", { scroll: false });
+
+      setLoading(false);
+      // Handle successful sign-in, such as setting user authentication
+    } else if (falsePass) {
+      toast.error("Email or password is wrong!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setLoading(false);
+    } else {
+      toast.error("Sign in failed", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setLoading(false);
+
+      // Handle sign-in error
+    }
+  };
   const {
     register,
     handleSubmit,
@@ -31,6 +100,7 @@ const SignIn = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     if (isFormDataFilled) {
       setLoading(true);
+      handleSignIn(data);
       console.log(data);
     }
   };
@@ -137,6 +207,7 @@ const SignIn = () => {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

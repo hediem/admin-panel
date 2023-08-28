@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "email": "moshtaghi.he@gmail.com",
+      "password": "hhhh7980",
+      "id": 1
+    }
+  ],
+  "products": [],
+  "categories": [
+    {
+      "name": "Category01",
+      "color": "#e1da0c",
+      "id": 1
+    },
+    {
+      "name": "Category02",
+      "color": "#FF7894",
+      "id": 2
+    },
+    {
+      "name": "Category03",
+      "color": "#51AEED",
+      "id": 3
+    },
+    {
+      "name": "Category04",
+      "color": "#63C8C8",
+      "id": 4
+    },
+    {
+      "name": "Category05",
+      "color": "#C7E0F4",
+      "id": 5
+    },
+    {
+      "name": "Category06",
+      "color": "#A155B9",
+      "id": 6
+    },
+    {
+      "name": "Category08",
+      "color": "#16BFD6",
+      "id": 8
+    },
+    {
+      "name": "Category09",
+      "color": "#A155B9",
+      "id": 9
+    },
+    {
+      "name": "Category10",
+      "color": "#2B88D8",
+      "id": 10
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 12
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 13
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 14
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 15
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 16
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 17
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 18
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 19
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 20
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 21
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 22
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 23
+    },
+    {
+      "name": "temp",
+      "color": "#FFCD56",
+      "id": 24
+    },
+    {
+      "name": "category 112",
+      "color": "#e31515",
+      "id": 25
+    }
+  ]
+}

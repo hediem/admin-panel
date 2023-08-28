@@ -54,7 +54,20 @@ body {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left 0.5s;
-
+  .backdrop {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    // @media (min-width: 991px) {
+    //   display: none;
+    // }
+    & .show {
+      // display: none;
+    }
+  }
   &.show {
     margin-left: 206px;
   }
