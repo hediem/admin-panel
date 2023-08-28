@@ -10,26 +10,26 @@ const Item = ({ item }: { item: CategoriesType }) => {
   const { setIsModalDeleteOpen, setShowBackDrop, setSelectedItem, setType } =
     useContext(AdminPanelContext);
   return (
-    <div
+    <tr
       style={{
         fontSize: "14px",
-        padding: "11px 12px",
-        borderBottom: `1px solid ${ColorSchema.grey30}`,
+        // padding: "11px 12px",
+        // borderBottom: `1px solid ${ColorSchema.grey30}`,
       }}
-      className="d-flex justify-content-between text-center category-item"
+      className="category-item"
     >
-      <div className="col-4 col-md-5 text-start">{item.name}</div>
-      <div className="d-none d-md-block col-4 col-md-1">
+      <td className="col-name">{item.name}</td>
+      <td className="col-id">
         c{item.id < 10 && "0"}
         {item.id}
-      </div>
-      <div className="col-4 col-md-1">
+      </td>
+      <td className="col-color">
         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
           <rect width="24" height="24" rx={2} fill={item.color} />
         </svg>
-      </div>
-      <div
-        className="d-flex justify-content-center col-4 col-md-1"
+      </td>
+      <td
+        className="d-inline-flex justify-content-center col-action"
         style={{ gap: "20px" }}
       >
         <Link
@@ -52,8 +52,8 @@ const Item = ({ item }: { item: CategoriesType }) => {
         >
           <Image src={Delete} alt="delete" width={20} height={20} />
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 };
 

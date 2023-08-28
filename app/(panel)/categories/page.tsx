@@ -30,6 +30,7 @@ const categories = () => {
     updater,
     setUpdater,
     setType,
+    setSelectedItem,
   } = useContext(AdminPanelContext);
   const [categories, setCategories] = useState<CategoriesType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -60,6 +61,7 @@ const categories = () => {
         setIsModalDeleteOpen(false);
         setShowBackDrop(false);
         setUpdater((prev) => !prev);
+        setSelectedItem({ name: "", color: "", id: 0 });
       } else {
         toast.success("Failed to delete category", {
           position: "top-center",
@@ -120,6 +122,10 @@ const categories = () => {
       }
     );
     setCategories(await response.json());
+
+    const totalCountHeader = response.headers.get("X-Total-Count");
+    const totalItems = totalCountHeader ? parseInt(totalCountHeader) : null;
+    setTotalCount(totalItems);
   };
 
   const debouncedSearch = useRef(

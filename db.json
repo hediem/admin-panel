@@ -25,7 +25,7 @@
     },
     {
       "name": "Category04",
-      "color": "#63C8C8",
+      "color": "#e111e1",
       "id": 4
     },
     {
@@ -56,11 +56,6 @@
     {
       "name": "temp",
       "color": "#FFCD56",
-      "id": 12
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
       "id": 13
     },
     {
@@ -72,11 +67,6 @@
       "name": "temp",
       "color": "#FFCD56",
       "id": 15
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 16
     },
     {
       "name": "temp",
@@ -112,11 +102,6 @@
       "name": "temp",
       "color": "#FFCD56",
       "id": 23
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 24
     },
     {
       "name": "category 112",

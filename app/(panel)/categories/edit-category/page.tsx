@@ -11,7 +11,8 @@ import AddandEdit from "@/components/categories/AddandEdit";
 
 const page = () => {
   const router = useRouter();
-  const { setUpdater, selectedItem } = useContext(AdminPanelContext);
+  const { setUpdater, selectedItem, setSelectedItem } =
+    useContext(AdminPanelContext);
 
   const [categoryName, setCategoryName] = useState("");
   const [selectedColor, setSelectedColor] = useState<ColorObjectType>({
@@ -48,6 +49,7 @@ const page = () => {
       });
       router.push("/categories", { scroll: false });
       setUpdater((prev) => !prev);
+      setSelectedItem({ name: "", color: "", id: 0 });
     } else {
       toast.error("Category edit failed", {
         position: "top-center",

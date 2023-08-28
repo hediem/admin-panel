@@ -3,8 +3,12 @@ import AdminPanelContext from "@/context/AdminPanelContext";
 import Image from "next/image";
 import close from "@/public/assets/icons/close-Icon.svg";
 const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
-  const { setIsModalDeleteOpen, setShowBackDrop, selectedItem } =
-    useContext(AdminPanelContext);
+  const {
+    setIsModalDeleteOpen,
+    setShowBackDrop,
+    selectedItem,
+    setSelectedItem,
+  } = useContext(AdminPanelContext);
 
   return (
     <div>
@@ -44,6 +48,7 @@ const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
               onClick={(e) => {
                 setIsModalDeleteOpen(false);
                 setShowBackDrop(false);
+                setSelectedItem({ name: "", color: "", id: 0 });
               }}
             >
               No
