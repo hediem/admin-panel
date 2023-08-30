@@ -32,10 +32,14 @@ const categories = () => {
     setType,
     setSelectedItem,
   } = useContext(AdminPanelContext);
+
   const [categories, setCategories] = useState<CategoriesType[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState<number | null>(0);
+  //false = asc , true = desc
+  const [sort, setSort] = useState(false);
+
   const pageCount = Math.ceil(totalCount !== null ? totalCount / 10 : 1); // Set the total number of pages here
 
   const deleteItem = async () => {
@@ -92,36 +96,31 @@ const categories = () => {
       setCurrentPage(newPage);
     }
   };
-  const getData = async () => {
-    const response = await fetch(
-      `http://localhost:8000/categories?_start=${
-        (currentPage - 1) * 10
-      }&_limit=10`,
-      {
-        method: "GET",
-      }
-    );
-    const categories: CategoriesType[] = await response.json();
+
+  const getData = async ({ search = "" } = {}) => {
+    console.log("in", sort);
+    const baseUrl = "http://localhost:8000/categories";
+    let url = baseUrl;
+    let payload = `_sort=name&_order=${!sort ? "asc" : "desc"}&_start=${
+      (currentPage - 1) * 10
+    }&_limit=10`;
+
+    if (search) {
+      payload += `&name_like=${search}`;
+    }
+
+    const response = await fetch(`${url}?${payload}`, {
+      method: "GET",
+    });
+
+    const categories = await response.json();
+
     if (categories.length === 0) {
       setCurrentPage((prev) => prev - 1);
       return;
     }
-    setCategories(categories);
 
-    const totalCountHeader = response.headers.get("X-Total-Count");
-    const totalItems = totalCountHeader ? parseInt(totalCountHeader) : null;
-    setTotalCount(totalItems);
-  };
-  const getSearchData = async (search: string) => {
-    const response = await fetch(
-      `http://localhost:8000/categories?name_like=${search}&_start=${
-        (currentPage - 1) * 10
-      }&_limit=10`,
-      {
-        method: "GET",
-      }
-    );
-    setCategories(await response.json());
+    setCategories(categories);
 
     const totalCountHeader = response.headers.get("X-Total-Count");
     const totalItems = totalCountHeader ? parseInt(totalCountHeader) : null;
@@ -131,7 +130,7 @@ const categories = () => {
   const debouncedSearch = useRef(
     debounce(async (search: string) => {
       try {
-        getSearchData(search);
+        getData({ search });
       } catch (error) {
         console.error("An error occurred", error);
       }
@@ -140,7 +139,7 @@ const categories = () => {
 
   useEffect(() => {
     if (searchTerm !== "") {
-      getSearchData(searchTerm);
+      getData({ search: searchTerm });
     } else {
       getData();
     }
@@ -195,6 +194,9 @@ const categories = () => {
         pageCount={pageCount}
         totalCount={totalCount}
         handlePageChange={handlePageChange}
+        // getData={getData}
+        sort={sort}
+        setSort={setSort}
       />
       {isModalDeleteOpen && <DeleteModal deleteFunc={deleteItem} />}
       <ToastContainer />

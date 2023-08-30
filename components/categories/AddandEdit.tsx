@@ -89,7 +89,7 @@ const AddandEdit = ({
         />
         <div className="title">{type === "edit" ? "Edit" : "New"} category</div>
       </div>
-      <div className="inputs">
+      <div className="inputs col-md-6 col-xl-5">
         <label htmlFor="name">Name</label>
         <input
           id="name"

@@ -1,22 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CategoriesType } from "@/utils/types";
 import Item from "./Item";
 import ColorSchema from "@/public/assets/kits/colors";
+import arrow from "@/public/assets/icons/Arrow-up.svg";
 import CustomPagination from "../common/Pagination";
+import Image from "next/image";
+import AdminPanelContext from "@/context/AdminPanelContext";
 const CategoriesTable = ({
   categories,
   currentPage,
   pageCount,
   totalCount,
   handlePageChange,
+  // getData,
+  sort,
+  setSort,
 }: {
   categories: CategoriesType[];
   currentPage: number;
   pageCount: number;
   totalCount: number | null;
   handlePageChange: (newPage: number) => void;
+  // getData: ({ sort }: { sort?: boolean }) => void;
+  sort: boolean;
+  setSort: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { setUpdater } = useContext(AdminPanelContext);
   return (
     <div
       style={{
@@ -29,7 +39,28 @@ const CategoriesTable = ({
           <table className="custom-table" style={{ marginBottom: "0px" }}>
             <thead>
               <tr className="header-row">
-                <th className="col-name">Name</th>
+                <th
+                  className="col-name"
+                  onClick={() => {
+                    setSort((prev) => !prev);
+                    setUpdater((prev) => !prev);
+                  }}
+                >
+                  <span>Name</span>
+
+                  <span>
+                    <Image
+                      src={arrow}
+                      alt="arrow"
+                      width={20}
+                      height={20}
+                      style={{
+                        transform: sort ? "rotateZ(180deg)" : "",
+                        transition: "transform 0.3s ease-in-out",
+                      }}
+                    />
+                  </span>
+                </th>
                 <th className="col-id">Id</th>
                 <th className="col-color">Color</th>
                 <th className="col-action">Action</th>
