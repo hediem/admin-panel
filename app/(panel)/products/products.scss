@@ -1,7 +1,8 @@
-.categories {
+.products {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 20px;
   .header {
     display: flex;
     align-items: center;
@@ -23,7 +24,7 @@
       }
     }
   }
-  .category-item {
+  .product-item {
     &:hover {
       background-color: var(--grey20);
       & td {
@@ -73,6 +74,15 @@
       &.error {
         border: 1px solid var(--status-colors-error);
         outline-color: var(--status-colors-error);
+      }
+    }
+    #category {
+      .css-13cymwt-control,
+      .css-t3ipsp-control {
+        margin-top: 4px;
+        border-radius: 2px;
+        // padding: 6px 8px;
+        border: 1px solid var(--grey110);
       }
     }
   }
@@ -208,7 +218,8 @@
       }
     }
     .col-id,
-    .col-color,
+    .col-category,
+    .col-price,
     .col-action {
       width: 25%; /* Each column takes 25% width */
       // border-left: 1px solid var(--grey30);

@@ -6,7 +6,28 @@
       "id": 1
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "name": "product",
+      "price": "100000",
+      "category": {
+        "name": "Category01",
+        "color": "#e1da0c",
+        "id": 1
+      },
+      "id": 1
+    },
+    {
+      "name": "ball",
+      "price": "15000",
+      "category": {
+        "name": "Addd",
+        "color": "#2B88D8",
+        "id": 26
+      },
+      "id": 3
+    }
+  ],
   "categories": [
     {
       "name": "Category01",

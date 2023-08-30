@@ -1,14 +1,14 @@
 "use client";
 import React, { useContext, useState } from "react";
-import { CategoriesType } from "@/utils/types";
+import { ProductsType } from "@/utils/types";
 import Item from "./Item";
 import ColorSchema from "@/public/assets/kits/colors";
 import arrow from "@/public/assets/icons/Arrow-up.svg";
 import CustomPagination from "../common/Pagination";
 import Image from "next/image";
 import AdminPanelContext from "@/context/AdminPanelContext";
-const CategoriesTable = ({
-  categories,
+const ProductsTable = ({
+  products,
   currentPage,
   pageCount,
   totalCount,
@@ -17,7 +17,7 @@ const CategoriesTable = ({
   sort,
   setSort,
 }: {
-  categories: CategoriesType[];
+  products: ProductsType[];
   currentPage: number;
   pageCount: number;
   totalCount: number | null;
@@ -62,12 +62,13 @@ const CategoriesTable = ({
                   </span>
                 </th>
                 <th className="col-id">Id</th>
-                <th className="col-color">Color</th>
+                <th className="col-category">Category</th>
+                <th className="col-price">Price</th>
                 <th className="col-action">Action</th>
               </tr>
             </thead>
             <tbody>
-              {categories.map((val) => {
+              {products?.map((val) => {
                 return <Item item={val} key={val.id} />;
               })}
             </tbody>
@@ -97,4 +98,4 @@ const CategoriesTable = ({
   );
 };
 
-export default CategoriesTable;
+export default ProductsTable;

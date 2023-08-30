@@ -98,7 +98,6 @@ const categories = () => {
   };
 
   const getData = async ({ search = "" } = {}) => {
-    console.log("in", sort);
     const baseUrl = "http://localhost:8000/categories";
     let url = baseUrl;
     let payload = `_sort=name&_order=${!sort ? "asc" : "desc"}&_start=${
@@ -188,16 +187,21 @@ const categories = () => {
           }}
         />
       </div>
-      <CategoriesTable
-        categories={categories}
-        currentPage={currentPage}
-        pageCount={pageCount}
-        totalCount={totalCount}
-        handlePageChange={handlePageChange}
-        // getData={getData}
-        sort={sort}
-        setSort={setSort}
-      />
+      {categories.length !== 0 ? (
+        <CategoriesTable
+          categories={categories}
+          currentPage={currentPage}
+          pageCount={pageCount}
+          totalCount={totalCount}
+          handlePageChange={handlePageChange}
+          // getData={getData}
+          sort={sort}
+          setSort={setSort}
+        />
+      ) : (
+        <div>There is no Category!</div>
+      )}
+
       {isModalDeleteOpen && <DeleteModal deleteFunc={deleteItem} />}
       <ToastContainer />
     </div>

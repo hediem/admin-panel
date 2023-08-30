@@ -3,6 +3,12 @@ type CategoriesType = {
   color: string;
   id: number;
 };
+type ProductsType = {
+  name: string;
+  category: CategoriesType;
+  price: string;
+  id: number;
+};
 type UsersType = {
   email: string;
   password: string;
@@ -13,5 +19,15 @@ type ColorObjectType = {
   hex: string;
   default: string;
 };
-
-export type { UsersType, CategoriesType, ColorObjectType };
+type CategoryOptions = {
+  label: string;
+  value: number;
+  data: CategoriesType;
+};
+export type {
+  UsersType,
+  CategoriesType,
+  ColorObjectType,
+  ProductsType,
+  CategoryOptions,
+};

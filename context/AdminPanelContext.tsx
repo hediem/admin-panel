@@ -2,19 +2,23 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import useWindowSize from "@/hooks/useWindowSize";
-import { CategoriesType } from "@/utils/types";
+import { CategoriesType, ProductsType } from "@/utils/types";
 type ContextType = {
   width: number | undefined;
   show: boolean;
   showBackDrop: boolean;
   isModalDeleteOpen: boolean;
+  isModalAddandEditOpen: boolean;
   selectedItem: CategoriesType;
+  selectedProduct: ProductsType;
   updater: boolean;
   type: string;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setShowBackDrop: React.Dispatch<React.SetStateAction<boolean>>;
   setIsModalDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalAddandEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedItem: React.Dispatch<React.SetStateAction<CategoriesType>>;
+  setSelectedProduct: React.Dispatch<React.SetStateAction<ProductsType>>;
   setUpdater: React.Dispatch<React.SetStateAction<boolean>>;
   setType: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -26,12 +30,21 @@ const AdminPanelContext = React.createContext<ContextType>({
   width: 1000,
   isModalDeleteOpen: false,
   setIsModalDeleteOpen: () => {},
+  isModalAddandEditOpen: false,
+  setIsModalAddandEditOpen: () => {},
   selectedItem: {
     name: "",
     color: "",
     id: 0,
   },
+  selectedProduct: {
+    name: "",
+    category: { name: "", color: "", id: 0 },
+    price: "0",
+    id: 0,
+  },
   setSelectedItem: () => {},
+  setSelectedProduct: () => {},
   updater: false,
   setUpdater: () => {},
   type: "",
@@ -48,10 +61,17 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
 }) => {
   const [show, setShow] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+  const [isModalAddandEditOpen, setIsModalAddandEditOpen] = useState(false);
   const [showBackDrop, setShowBackDrop] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CategoriesType>({
     name: "",
     color: "",
+    id: 0,
+  });
+  const [selectedProduct, setSelectedProduct] = useState<ProductsType>({
+    name: "",
+    category: { name: "", color: "", id: 0 },
+    price: "0",
     id: 0,
   });
   const [updater, setUpdater] = useState(false);
@@ -77,6 +97,10 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
         setUpdater,
         type,
         setType,
+        selectedProduct,
+        setSelectedProduct,
+        isModalAddandEditOpen,
+        setIsModalAddandEditOpen,
       }}
     >
       <div
