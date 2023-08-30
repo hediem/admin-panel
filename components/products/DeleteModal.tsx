@@ -9,7 +9,16 @@ const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
     selectedProduct,
     setSelectedProduct,
   } = useContext(AdminPanelContext);
-
+  const reset = () => {
+    setIsModalDeleteOpen(false);
+    setShowBackDrop(false);
+    setSelectedProduct({
+      name: "",
+      category: { name: "", color: "", id: 0 },
+      price: "0",
+      id: 0,
+    });
+  };
   return (
     <div className="bottom-modal">
       <div className="modal-content">
@@ -28,10 +37,7 @@ const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
             alt="close"
             width={24}
             height={24}
-            onClick={(e) => {
-              setIsModalDeleteOpen(false);
-              setShowBackDrop(false);
-            }}
+            onClick={reset}
           />
         </div>
         <p>Are you sure you want to delete the {selectedProduct?.name}?</p>
@@ -42,19 +48,7 @@ const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
           <div className="save-button" onClick={deleteFunc}>
             Yes
           </div>
-          <div
-            className="empty-button"
-            onClick={(e) => {
-              setIsModalDeleteOpen(false);
-              setShowBackDrop(false);
-              setSelectedProduct({
-                name: "",
-                category: { name: "", color: "", id: 0 },
-                price: "0",
-                id: 0,
-              });
-            }}
-          >
+          <div className="empty-button" onClick={reset}>
             No
           </div>
         </div>

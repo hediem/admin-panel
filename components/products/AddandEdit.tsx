@@ -52,6 +52,20 @@ const AddandEdit = ({
     }
   }, []);
 
+  const reset = () => {
+    setIsModalAddandEditOpen(false);
+    setShowBackDrop(false);
+    setSelectedProduct({
+      name: "",
+      category: { name: "", color: "", id: 0 },
+      price: "0",
+      id: 0,
+    });
+    setProductName("");
+    setProductPrice("");
+    setProductCategory(null);
+  };
+
   return (
     <div className="bottom-modal">
       <div className="modal-content">
@@ -70,10 +84,7 @@ const AddandEdit = ({
             alt="close"
             width={24}
             height={24}
-            onClick={(e) => {
-              setIsModalAddandEditOpen(false);
-              setShowBackDrop(false);
-            }}
+            onClick={reset}
           />
         </div>
         <div className="products">
@@ -115,22 +126,7 @@ const AddandEdit = ({
           <div className="save-button" onClick={submit}>
             Save
           </div>
-          <div
-            className="empty-button"
-            onClick={(e) => {
-              setIsModalAddandEditOpen(false);
-              setShowBackDrop(false);
-              setSelectedProduct({
-                name: "",
-                category: { name: "", color: "", id: 0 },
-                price: "0",
-                id: 0,
-              });
-              setProductName("");
-              setProductPrice("");
-              setProductCategory(null);
-            }}
-          >
+          <div className="empty-button" onClick={reset}>
             Cancle
           </div>
         </div>

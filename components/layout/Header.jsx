@@ -19,8 +19,14 @@ import close from "../../public/assets/icons/Dismiss.svg";
 import "./layout.scss";
 
 const Header = () => {
-  const { show, setShow, width, setShowBackDrop } =
-    useContext(AdminPanelContext);
+  const {
+    show,
+    setShow,
+    width,
+    setShowBackDrop,
+    isModalAddandEditOpen,
+    isModalDeleteOpen,
+  } = useContext(AdminPanelContext);
   const path = usePathname();
   const pathSegments = path.split("/");
   const links = [];
@@ -145,7 +151,9 @@ const Header = () => {
               className="closebtn"
               onClick={(e) => {
                 setShow(false);
-                setShowBackDrop(false);
+                if (!isModalAddandEditOpen && !isModalDeleteOpen) {
+                  setShowBackDrop(false);
+                }
               }}
             >
               <Image src={close.src} alt="close" width={24} height={24} />

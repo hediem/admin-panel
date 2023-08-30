@@ -8,14 +8,28 @@ import Link from "next/link";
 import AdminPanelContext from "@/context/AdminPanelContext";
 import { usePathname } from "next/navigation";
 const SideBar = () => {
-  const { width, show } = useContext(AdminPanelContext);
+  const { width, show, setShow } = useContext(AdminPanelContext);
   const path = usePathname();
   return (
     <div className="sidebar">
       {width > 991 && !show ? (
         <div className="fixed-icons">
-          <Image src={Home} alt="Home" width={28} height={28} />
-          <Image src={Tag} alt="Tag" width={28} height={28} />
+          <Image
+            src={Home}
+            alt="Home"
+            width={28}
+            height={28}
+            onClick={() => setShow(true)}
+            style={{ cursor: "pointer" }}
+          />
+          <Image
+            src={Tag}
+            alt="Tag"
+            width={28}
+            height={28}
+            onClick={() => setShow(true)}
+            style={{ cursor: "pointer" }}
+          />
         </div>
       ) : (
         <Accordion>
