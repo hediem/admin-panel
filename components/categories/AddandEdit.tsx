@@ -109,7 +109,6 @@ const AddandEdit = ({
           id="name"
           placeholder="Enter category name"
           type="text"
-          // defaultValue={type === "edit" ? selectedItem.name : ""}
           value={categoryData.categoryName}
           onChange={(e) =>
             setCategoryData((prevData) => ({

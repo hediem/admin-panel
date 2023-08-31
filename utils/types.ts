@@ -12,6 +12,10 @@ type ProductsType = {
 type UsersType = {
   email: string;
   password: string;
+  profilepic: string;
+  fullname: string;
+  birthday: string;
+  gender: string;
   id: number;
 };
 

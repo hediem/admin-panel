@@ -84,8 +84,10 @@ const CustomDropDown = () => {
           <span>Edit profile</span>
         </Dropdown.Item>
         <Dropdown.Item eventKey="2">
-          <Image src={Key} alt="Key" width={20} height={20} />
-          <span>Change password</span>
+          <Link href="/change-password">
+            <Image src={Key} alt="Key" width={20} height={20} />
+            <span>Change password</span>
+          </Link>
         </Dropdown.Item>
         <Dropdown.Item
           eventKey="3"

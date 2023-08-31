@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import useWindowSize from "@/hooks/useWindowSize";
-import { CategoriesType, ProductsType } from "@/utils/types";
+import { CategoriesType, ProductsType, UsersType } from "@/utils/types";
 type ContextType = {
   width: number | undefined;
   show: boolean;
@@ -13,6 +13,7 @@ type ContextType = {
   selectedProduct: ProductsType;
   updater: boolean;
   type: string;
+  userInfo: UsersType;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   setShowBackDrop: React.Dispatch<React.SetStateAction<boolean>>;
   setIsModalDeleteOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,6 +22,7 @@ type ContextType = {
   setSelectedProduct: React.Dispatch<React.SetStateAction<ProductsType>>;
   setUpdater: React.Dispatch<React.SetStateAction<boolean>>;
   setType: React.Dispatch<React.SetStateAction<string>>;
+  setUserInfo: React.Dispatch<React.SetStateAction<UsersType>>;
 };
 const AdminPanelContext = React.createContext<ContextType>({
   show: false,
@@ -49,6 +51,16 @@ const AdminPanelContext = React.createContext<ContextType>({
   setUpdater: () => {},
   type: "",
   setType: () => {},
+  userInfo: {
+    id: 0,
+    email: "",
+    password: "",
+    profilepic: "",
+    fullname: "",
+    birthday: "",
+    gender: "",
+  },
+  setUserInfo: () => {},
 });
 export default AdminPanelContext;
 
@@ -59,6 +71,15 @@ interface AdminPanelProviderProps {
 export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
   children,
 }) => {
+  const [userInfo, setUserInfo] = useState({
+    id: 1,
+    email: "moshtaghi.he@gmail.com",
+    password: "hhhh7980",
+    profilepic: "",
+    fullname: "",
+    birthday: "",
+    gender: "",
+  });
   const [show, setShow] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isModalAddandEditOpen, setIsModalAddandEditOpen] = useState(false);
@@ -78,7 +99,10 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
   const [type, setType] = useState("edit");
   const windowSize = useWindowSize();
   const width =
-    windowSize.width !== undefined ? windowSize.width : window.innerWidth;
+    typeof window !== "undefined" && windowSize.width !== undefined
+      ? windowSize.width
+      : undefined;
+  // windowSize.width !== undefined ? windowSize.width : window.innerWidth;
   const path = usePathname();
 
   return (
@@ -101,6 +125,8 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
         setSelectedProduct,
         isModalAddandEditOpen,
         setIsModalAddandEditOpen,
+        userInfo,
+        setUserInfo,
       }}
     >
       <div
