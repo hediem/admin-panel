@@ -17,6 +17,7 @@ import profile from "../../public/assets/images/profile.svg";
 import close from "../../public/assets/icons/Dismiss.svg";
 
 import "./layout.scss";
+import Link from "next/link";
 
 const Header = () => {
   const {
@@ -41,7 +42,7 @@ const Header = () => {
       format: formattedWords.join(""),
     };
   });
-
+  console.log({ formattedPathSegments });
   return (
     <div
       className="d-flex flex-row align-items-center justify-content-between header px-3 px-md-4"
@@ -90,8 +91,10 @@ const Header = () => {
             formattedPathSegments.map((val, index) => {
               return (
                 <div key={index} className="d-flex align-items-center">
-                  <Breadcrumb.Item href={`${val.real}`}>
-                    {val.format === "" ? "Home" : val.format}
+                  <Breadcrumb.Item>
+                    <Link href={val.real !== "" ? val.real : "/"}>
+                      {val.format === "" ? "Home" : val.format}
+                    </Link>
                   </Breadcrumb.Item>
                   {index !== formattedPathSegments.length - 1 && (
                     <span className="mx-3">{">"}</span>
@@ -100,7 +103,9 @@ const Header = () => {
               );
             })
           ) : (
-            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link href="/">Home</Link>
+            </Breadcrumb.Item>
           )}
         </Breadcrumb>
       </div>
