@@ -5,20 +5,16 @@ import ColorPicker from "@/components/common/ColorPicker";
 import checkmark from "@/public/assets/icons/Checkmark.svg";
 import arrow from "@/public/assets/icons/Arrow.svg";
 import AdminPanelContext from "@/context/AdminPanelContext";
-import { ColorObjectType } from "@/utils/types";
+import { CategoryFormData, ColorObjectType } from "@/utils/types";
 
 const AddandEdit = ({
   submit,
-  categoryName,
-  selectedColor,
-  setCategoryName,
-  setSelectedColor,
+  categoryData,
+  setCategoryData,
 }: {
   submit: () => void;
-  categoryName: string;
-  selectedColor: ColorObjectType;
-  setCategoryName: (name: string) => void;
-  setSelectedColor: (color: ColorObjectType) => void;
+  categoryData: CategoryFormData;
+  setCategoryData: React.Dispatch<React.SetStateAction<CategoryFormData>>;
 }) => {
   const router = useRouter();
   const { selectedItem, type, setSelectedItem } = useContext(AdminPanelContext);
@@ -54,21 +50,39 @@ const AddandEdit = ({
   const handleColorClick = () => {
     setColorPickerVisible(true);
   };
+
   const handleColorClose = () => {
     setColorPickerVisible(false);
   };
-  const handleColorChange = (color: { hex: string }) => {
-    console.log("click");
 
-    setSelectedColor({ default: "", hex: color.hex });
+  const handleColorChange = (color: { hex: string }) => {
+    setCategoryData((prevData) => ({
+      ...prevData,
+      selectedColor: { default: "", hex: color.hex },
+    }));
     // setColorPickerVisible(false);
   };
+
+  const checkFormFill = () => {
+    if (
+      categoryData.categoryName === "" ||
+      (categoryData.selectedColor.hex === "" &&
+        categoryData.selectedColor.default == "")
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   useEffect(() => {
     if (selectedItem.id !== 0) {
-      setCategoryName(selectedItem.name);
-      setSelectedColor({
-        default: selectedItem.color,
-        hex: selectedItem.color,
+      setCategoryData({
+        categoryName: selectedItem.name,
+        selectedColor: {
+          default: selectedItem.color,
+          hex: selectedItem.color,
+        },
       });
     }
   }, []);
@@ -96,8 +110,13 @@ const AddandEdit = ({
           placeholder="Enter category name"
           type="text"
           // defaultValue={type === "edit" ? selectedItem.name : ""}
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
+          value={categoryData.categoryName}
+          onChange={(e) =>
+            setCategoryData((prevData) => ({
+              ...prevData,
+              categoryName: e.target.value,
+            }))
+          }
         />
       </div>
       <div
@@ -114,7 +133,10 @@ const AddandEdit = ({
               return (
                 <div
                   onClick={(e) =>
-                    setSelectedColor({ hex: "", default: val.color })
+                    setCategoryData((prevData) => ({
+                      ...prevData,
+                      selectedColor: { hex: "", default: val.color },
+                    }))
                   }
                   style={{ cursor: "pointer" }}
                 >
@@ -124,7 +146,7 @@ const AddandEdit = ({
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     {(type === "edit" && selectedItem.color === val.color) ||
-                    val.color === selectedColor.default ? (
+                    val.color === categoryData.selectedColor.default ? (
                       <image
                         href={checkmark.src}
                         x={4}
@@ -141,7 +163,11 @@ const AddandEdit = ({
                       height="28"
                       rx={2}
                       fill={val.color}
-                      opacity={val.color === selectedColor.default ? 0.5 : 1}
+                      opacity={
+                        val.color === categoryData.selectedColor.default
+                          ? 0.5
+                          : 1
+                      }
                     />
                   </svg>
                 </div>
@@ -155,7 +181,11 @@ const AddandEdit = ({
               width="20"
               height="20"
               rx={2}
-              fill={selectedColor.hex === "" ? "#F0F0F0" : selectedColor.hex}
+              fill={
+                categoryData.selectedColor.hex === ""
+                  ? "#F0F0F0"
+                  : categoryData.selectedColor.hex
+              }
             />
           </svg>
           <span style={{ fontWeight: "600", fontSize: "12px" }}>
@@ -180,9 +210,15 @@ const AddandEdit = ({
           </div>
         )}
       </div>
-      <div className="save-button" onClick={submit}>
+      <button
+        disabled={!checkFormFill()}
+        className={`save-button ${!checkFormFill() && "disabled"}`}
+        onClick={(e) => {
+          if (checkFormFill()) submit();
+        }}
+      >
         save
-      </div>
+      </button>
     </div>
   );
 };

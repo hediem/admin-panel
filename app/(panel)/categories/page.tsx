@@ -114,7 +114,7 @@ const categories = () => {
 
     const categories = await response.json();
 
-    if (categories.length === 0) {
+    if (categories.length === 0 && currentPage !== 1) {
       setCurrentPage((prev) => prev - 1);
       return;
     }

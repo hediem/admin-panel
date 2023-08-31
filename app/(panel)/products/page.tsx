@@ -5,7 +5,12 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import debounce from "lodash.debounce";
-import { CategoriesType, CategoryOptions, ProductsType } from "@/utils/types";
+import {
+  CategoriesType,
+  CategoryOptions,
+  ProductFormData,
+  ProductsType,
+} from "@/utils/types";
 import ProductsTable from "@/components/products/ProductsTable";
 import DeleteModal from "@/components/products/DeleteModal";
 import ColorSchema from "@/public/assets/kits/colors";
@@ -50,15 +55,63 @@ const products = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalCount, setTotalCount] = useState<number | null>(0);
 
-  const [productName, setProductName] = useState<string>("");
-  const [productPrice, setProductPrice] = useState<string>("");
-  const [productCategory, setProductCategory] =
-    useState<CategoryOptions | null>(null);
+  const [productData, setProductData] = useState<ProductFormData>({
+    productName: "",
+    productPrice: "",
+    productCategory: null,
+  });
 
   //false = asc , true = desc
   const [sort, setSort] = useState(false);
 
   const pageCount = Math.ceil(totalCount !== null ? totalCount / 10 : 1); // Set the total number of pages here
+
+  const getCategories = async () => {
+    let cat: CategoryOptions[] = [];
+    const responseCategory = await fetch(`http://localhost:8000/categories`, {
+      method: "GET",
+    });
+    const categories = await responseCategory.json();
+    categories.map((val: CategoriesType) => {
+      cat.push({ label: val.name, value: val.id, data: val });
+    });
+    setCategoriesOptions(cat);
+  };
+
+  const getData = async ({ search = "" } = {}) => {
+    const baseUrl = "http://localhost:8000/products";
+    let url = baseUrl;
+    let payload = `_sort=name&_order=${!sort ? "asc" : "desc"}&_start=${
+      (currentPage - 1) * 10
+    }&_limit=10`;
+
+    if (search) {
+      payload += `&name_like=${search}`;
+    }
+
+    const response = await fetch(`${url}?${payload}`, {
+      method: "GET",
+    });
+
+    const products = await response.json();
+
+    if (products.length === 0 && currentPage !== 1) {
+      setCurrentPage((prev) => prev - 1);
+      return;
+    }
+
+    setProducts(products);
+
+    const totalCountHeader = response.headers.get("X-Total-Count");
+    const totalItems = totalCountHeader ? parseInt(totalCountHeader) : null;
+    setTotalCount(totalItems);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= pageCount) {
+      setCurrentPage(newPage);
+    }
+  };
 
   const deleteItem = async () => {
     try {
@@ -114,52 +167,6 @@ const products = () => {
       });
     }
   };
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= pageCount) {
-      setCurrentPage(newPage);
-    }
-  };
-
-  const getCategories = async () => {
-    let cat: CategoryOptions[] = [];
-    const responseCategory = await fetch(`http://localhost:8000/categories`, {
-      method: "GET",
-    });
-    const categories = await responseCategory.json();
-    categories.map((val: CategoriesType) => {
-      cat.push({ label: val.name, value: val.id, data: val });
-    });
-    setCategoriesOptions(cat);
-  };
-
-  const getData = async ({ search = "" } = {}) => {
-    const baseUrl = "http://localhost:8000/products";
-    let url = baseUrl;
-    let payload = `_sort=name&_order=${!sort ? "asc" : "desc"}&_start=${
-      (currentPage - 1) * 10
-    }&_limit=10`;
-
-    if (search) {
-      payload += `&name_like=${search}`;
-    }
-
-    const response = await fetch(`${url}?${payload}`, {
-      method: "GET",
-    });
-
-    const products = await response.json();
-
-    if (products.length === 0) {
-      setCurrentPage((prev) => prev - 1);
-      return;
-    }
-
-    setProducts(products);
-
-    const totalCountHeader = response.headers.get("X-Total-Count");
-    const totalItems = totalCountHeader ? parseInt(totalCountHeader) : null;
-    setTotalCount(totalItems);
-  };
 
   const debouncedSearch = useRef(
     debounce(async (search: string) => {
@@ -169,12 +176,13 @@ const products = () => {
         console.error("An error occurred", error);
       }
     }, 300)
-  ); // Debounce time in milliseconds
+  );
+
   const editProduct = async () => {
     const data = {
-      name: productName,
-      price: productPrice,
-      category: productCategory?.data,
+      name: productData.productName,
+      price: productData.productPrice,
+      category: productData.productCategory?.data,
     };
 
     const response = await fetch(
@@ -198,16 +206,7 @@ const products = () => {
         progress: undefined,
         theme: "light",
       });
-      router.push("/products", { scroll: false });
-      setUpdater((prev) => !prev);
-      setSelectedProduct({
-        name: "",
-        category: { name: "", color: "", id: 0 },
-        price: "0",
-        id: 0,
-      });
-      setIsModalAddandEditOpen(false);
-      setShowBackDrop(false);
+      reset();
     } else {
       toast.error("Product edit failed", {
         position: "top-center",
@@ -235,9 +234,9 @@ const products = () => {
 
   const addProduct = async () => {
     const data = {
-      name: productName,
-      price: productPrice,
-      category: productCategory?.data,
+      name: productData.productName,
+      price: productData.productPrice,
+      category: productData.productCategory?.data,
     };
 
     let check = await handleCheckProduct(data);
@@ -261,10 +260,7 @@ const products = () => {
           progress: undefined,
           theme: "light",
         });
-        router.push("/products", { scroll: false });
-        setUpdater((prev) => !prev);
-        setIsModalAddandEditOpen(false);
-        setShowBackDrop(false);
+        reset();
       } else {
         toast.error("Product add failed", {
           position: "top-center",
@@ -290,9 +286,29 @@ const products = () => {
       });
     }
   };
+
+  const reset = () => {
+    router.push("/products", { scroll: false });
+    setUpdater((prev) => !prev);
+    setSelectedProduct({
+      name: "",
+      category: { name: "", color: "", id: 0 },
+      price: "0",
+      id: 0,
+    });
+    setIsModalAddandEditOpen(false);
+    setShowBackDrop(false);
+    setProductData({
+      productName: "",
+      productPrice: "",
+      productCategory: null,
+    });
+  };
+
   useEffect(() => {
     getCategories();
   }, []);
+
   useEffect(() => {
     if (searchTerm !== "") {
       getData({ search: searchTerm });
@@ -363,11 +379,8 @@ const products = () => {
       {isModalAddandEditOpen && (
         <AddandEdit
           submit={type === "edit" ? editProduct : addProduct}
-          productName={productName}
-          setProductName={setProductName}
-          setProductPrice={setProductPrice}
-          productCategory={productCategory}
-          setProductCategory={setProductCategory}
+          productData={productData}
+          setProductData={setProductData}
           categoriesOptions={categoriesOptions}
         />
       )}

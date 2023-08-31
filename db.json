@@ -8,24 +8,34 @@
   ],
   "products": [
     {
-      "name": "product",
-      "price": "100000",
+      "name": "mobile",
+      "price": "128500",
       "category": {
-        "name": "Category01",
-        "color": "#e1da0c",
-        "id": 1
+        "name": "Category04",
+        "color": "#e111e1",
+        "id": 4
       },
-      "id": 1
+      "id": 2
     },
     {
-      "name": "ball",
-      "price": "15000",
+      "name": "dfgh",
+      "price": "1595",
       "category": {
-        "name": "Addd",
-        "color": "#2B88D8",
-        "id": 26
+        "name": "Category03",
+        "color": "#51AEED",
+        "id": 3
       },
       "id": 3
+    },
+    {
+      "name": "pffghjhgf",
+      "price": "485926",
+      "category": {
+        "name": "Category05",
+        "color": "#C7E0F4",
+        "id": 5
+      },
+      "id": 4
     }
   ],
   "categories": [

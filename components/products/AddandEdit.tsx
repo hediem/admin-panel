@@ -3,26 +3,18 @@ import React, { useContext, useEffect, useState } from "react";
 import AdminPanelContext from "@/context/AdminPanelContext";
 import close from "@/public/assets/icons/close-Icon.svg";
 import CustomSelect from "../common/CustomSelect";
-//@ts-ignore
-import { ValueType } from "react-select";
-import { CategoryOptions } from "@/utils/types";
-type OptionType = { label: string; value: string }; // Customize this type as needed
+import { CategoryOptions, ProductFormData } from "@/utils/types";
+import addCommas from "@/utils/addCommas";
 
 const AddandEdit = ({
   submit,
-  productName,
-  setProductName,
-  setProductPrice,
-  productCategory,
-  setProductCategory,
+  productData,
+  setProductData,
   categoriesOptions,
 }: {
   submit: () => void;
-  productName: string;
-  setProductName: (name: string) => void;
-  setProductPrice: (price: string) => void;
-  productCategory: ValueType<OptionType>;
-  setProductCategory: (selectedOption: ValueType<OptionType>) => void;
+  productData: ProductFormData;
+  setProductData: React.Dispatch<React.SetStateAction<ProductFormData>>;
   categoriesOptions: CategoryOptions[];
 }) => {
   const {
@@ -38,20 +30,11 @@ const AddandEdit = ({
     const inputValue = event.target.value.replace(/[^\d]/g, ""); // Remove non-digit characters
     const formattedValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Add commas as thousands separators
     setFormattedPrice(formattedValue);
-    setProductPrice(inputValue);
+    setProductData((prevData) => ({
+      ...prevData,
+      productPrice: inputValue,
+    }));
   };
-  useEffect(() => {
-    if (selectedProduct.id !== 0) {
-      setProductName(selectedProduct.name);
-      setProductPrice(selectedProduct.price);
-      setProductCategory({
-        label: selectedProduct.category.name,
-        value: selectedProduct.category.id,
-        data: selectedProduct.category,
-      });
-    }
-  }, []);
-
   const reset = () => {
     setIsModalAddandEditOpen(false);
     setShowBackDrop(false);
@@ -61,10 +44,38 @@ const AddandEdit = ({
       price: "0",
       id: 0,
     });
-    setProductName("");
-    setProductPrice("");
-    setProductCategory(null);
+    setProductData({
+      productName: "",
+      productPrice: "",
+      productCategory: null,
+    });
   };
+  const checkFormFill = () => {
+    if (
+      productData.productName === "" ||
+      productData.productPrice === "" ||
+      productData.productCategory === null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  useEffect(() => {
+    if (selectedProduct.id !== 0) {
+      setProductData({
+        productName: selectedProduct.name,
+        productPrice: selectedProduct.price,
+        productCategory: {
+          label: selectedProduct.category.name,
+          value: selectedProduct.category.id,
+          data: selectedProduct.category,
+        },
+      });
+      setFormattedPrice(addCommas(selectedProduct.price));
+    }
+  }, []);
+  console.log(!checkFormFill());
 
   return (
     <div className="bottom-modal">
@@ -94,8 +105,13 @@ const AddandEdit = ({
               id="name"
               placeholder="Enter product name"
               type="text"
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
+              value={productData.productName}
+              onChange={(e) =>
+                setProductData((prevData) => ({
+                  ...prevData,
+                  productName: e.target.value,
+                }))
+              }
             />
           </div>
           <div className="inputs">
@@ -103,8 +119,13 @@ const AddandEdit = ({
             <CustomSelect
               id="category"
               options={categoriesOptions}
-              value={productCategory}
-              onChange={setProductCategory}
+              value={productData.productCategory}
+              onChange={(e) => {
+                setProductData((prevData) => ({
+                  ...prevData,
+                  productCategory: e,
+                }));
+              }}
               placeholder="Select a category"
             />
           </div>
@@ -123,9 +144,15 @@ const AddandEdit = ({
           className="d-flex justify-content-between"
           style={{ gap: "8px", width: "fit-content", alignSelf: "end" }}
         >
-          <div className="save-button" onClick={submit}>
+          <button
+            disabled={!checkFormFill()}
+            className={`save-button ${!checkFormFill() && "disabled"}`}
+            onClick={(e) => {
+              if (checkFormFill()) submit();
+            }}
+          >
             Save
-          </div>
+          </button>
           <div className="empty-button" onClick={reset}>
             Cancle
           </div>

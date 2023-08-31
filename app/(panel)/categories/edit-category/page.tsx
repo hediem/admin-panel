@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-import { ColorObjectType } from "@/utils/types";
+import { CategoryFormData, ColorObjectType } from "@/utils/types";
 import AdminPanelContext from "@/context/AdminPanelContext";
 
 import "../categories.scss";
@@ -18,17 +18,18 @@ const page = () => {
   const { setUpdater, selectedItem, setSelectedItem } =
     useContext(AdminPanelContext);
 
-  const [categoryName, setCategoryName] = useState("");
-  const [selectedColor, setSelectedColor] = useState<ColorObjectType>({
-    hex: "",
-    default: "",
+  const [categoryData, setCategoryData] = useState<CategoryFormData>({
+    categoryName: "",
+    selectedColor: { hex: "", default: "" },
   });
 
   const editCategory = async () => {
     const data = {
-      name: categoryName,
+      name: categoryData.categoryName,
       color:
-        selectedColor.hex !== "" ? selectedColor.hex : selectedColor.default,
+        categoryData.selectedColor.hex !== ""
+          ? categoryData.selectedColor.hex
+          : categoryData.selectedColor.default,
     };
     const response = await fetch(
       `http://localhost:8000/categories/${selectedItem.id}`,
@@ -54,6 +55,10 @@ const page = () => {
       router.push("/categories", { scroll: false });
       setUpdater((prev) => !prev);
       setSelectedItem({ name: "", color: "", id: 0 });
+      setCategoryData({
+        categoryName: "",
+        selectedColor: { hex: "", default: "" },
+      });
     } else {
       toast.error("Category edit failed", {
         position: "top-center",
@@ -72,10 +77,8 @@ const page = () => {
     <div className="categories">
       <AddandEdit
         submit={editCategory}
-        categoryName={categoryName}
-        selectedColor={selectedColor}
-        setCategoryName={setCategoryName}
-        setSelectedColor={setSelectedColor}
+        categoryData={categoryData}
+        setCategoryData={setCategoryData}
       />
       <ToastContainer />
     </div>

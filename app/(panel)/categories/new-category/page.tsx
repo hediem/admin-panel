@@ -3,7 +3,11 @@
 import React, { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-import { CategoriesType, ColorObjectType } from "@/utils/types";
+import {
+  CategoriesType,
+  CategoryFormData,
+  ColorObjectType,
+} from "@/utils/types";
 import AdminPanelContext from "@/context/AdminPanelContext";
 
 import "../categories.scss";
@@ -23,10 +27,9 @@ const page = () => {
   const router = useRouter();
   const { setUpdater } = useContext(AdminPanelContext);
 
-  const [categoryName, setCategoryName] = useState("");
-  const [selectedColor, setSelectedColor] = useState<ColorObjectType>({
-    hex: "",
-    default: "",
+  const [categoryData, setCategoryData] = useState<CategoryFormData>({
+    categoryName: "",
+    selectedColor: { hex: "", default: "" },
   });
 
   const handleCheckCategory = async (data: Inputs) => {
@@ -42,9 +45,11 @@ const page = () => {
 
   const addCategory = async () => {
     const data = {
-      name: categoryName,
+      name: categoryData.categoryName,
       color:
-        selectedColor.hex !== "" ? selectedColor.hex : selectedColor.default,
+        categoryData.selectedColor.hex !== ""
+          ? categoryData.selectedColor.hex
+          : categoryData.selectedColor.default,
     };
     let check = await handleCheckCategory(data);
 
@@ -69,6 +74,10 @@ const page = () => {
         });
         router.push("/categories", { scroll: false });
         setUpdater((prev) => !prev);
+        setCategoryData({
+          categoryName: "",
+          selectedColor: { hex: "", default: "" },
+        });
       } else {
         toast.error("Category add failed", {
           position: "top-center",
@@ -99,10 +108,8 @@ const page = () => {
     <div>
       <AddandEdit
         submit={addCategory}
-        categoryName={categoryName}
-        selectedColor={selectedColor}
-        setCategoryName={setCategoryName}
-        setSelectedColor={setSelectedColor}
+        categoryData={categoryData}
+        setCategoryData={setCategoryData}
       />
       <ToastContainer />
     </div>

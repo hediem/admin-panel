@@ -24,10 +24,21 @@ type CategoryOptions = {
   value: number;
   data: CategoriesType;
 };
+type ProductFormData = {
+  productName: string;
+  productPrice: string;
+  productCategory: CategoryOptions | null;
+};
+type CategoryFormData = {
+  categoryName: string;
+  selectedColor: ColorObjectType;
+};
 export type {
   UsersType,
   CategoriesType,
   ColorObjectType,
   ProductsType,
   CategoryOptions,
+  ProductFormData,
+  CategoryFormData,
 };

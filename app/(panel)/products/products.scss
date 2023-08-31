@@ -107,6 +107,9 @@
     border-radius: 2px;
     width: fit-content;
     cursor: pointer;
+    &.disabled {
+      opacity: 0.5;
+    }
   }
   .empty-button {
     margin-top: 24px;
