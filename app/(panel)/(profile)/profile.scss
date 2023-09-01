@@ -38,6 +38,8 @@
       border-radius: 2px;
       padding: 6px 8px;
       border: 1px solid var(--grey110);
+      gap: 8px;
+      display: flex;
       &:focus-visible {
         outline: 1px solid var(--input-border);
         border-radius: 2px;

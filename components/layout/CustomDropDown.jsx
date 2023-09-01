@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Chevron from "@/public/assets/icons/Chevron.svg";
 import Edit from "@/public/assets/icons/Edit.svg";
@@ -9,6 +9,7 @@ import profile from "@/public/assets/images/profile.svg";
 import Image from "next/image";
 import ColorSchema from "@/public/assets/kits/colors";
 import Link from "next/link";
+import AdminPanelContext from "@/context/AdminPanelContext";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -30,6 +31,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 const CustomMenu = React.forwardRef(
   ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
     const [value, setValue] = useState("");
+    const { userInfo } = useContext(AdminPanelContext);
 
     return (
       <div
@@ -47,7 +49,7 @@ const CustomMenu = React.forwardRef(
             </div>
           </div>
           <div className="description col-6">
-            <div className="name">Hedieh Moshtaghi</div>
+            <div className="name">{userInfo.fullname}</div>
             <Link href={"https://github.com/hediem"} className="link">
               github.com/hediem
             </Link>

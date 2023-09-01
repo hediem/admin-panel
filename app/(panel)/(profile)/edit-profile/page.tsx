@@ -39,7 +39,7 @@ function CustomInput({
 
 const EditProfile = () => {
   const router = useRouter();
-  const { userInfo } = useContext(AdminPanelContext);
+  const { userInfo, getUserData } = useContext(AdminPanelContext);
   const [birthDate, setBirthDate] = useState<Value>(userInfo.birthday * 1000);
   const [file, setFile] = useState(null);
   const [profileData, setProfileData] = useState({
@@ -98,6 +98,7 @@ const EditProfile = () => {
             progress: undefined,
             theme: "light",
           });
+          getUserData(userInfo.email);
           // Handle the server's response as needed
         } else {
           toast.error("User update failed", {

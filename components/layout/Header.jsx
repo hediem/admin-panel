@@ -27,6 +27,7 @@ const Header = () => {
     setShowBackDrop,
     isModalAddandEditOpen,
     isModalDeleteOpen,
+    userInfo,
   } = useContext(AdminPanelContext);
   const path = usePathname();
   const pathSegments = path.split("/");
@@ -119,7 +120,7 @@ const Header = () => {
         </div>
 
         <span style={{ fontSize: "10px", color: ColorSchema.grey160 }}>
-          Hedieh Moshtaghi
+          {userInfo.fullname}
         </span>
         <CustomDropDown />
       </div>
