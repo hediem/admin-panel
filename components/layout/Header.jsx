@@ -42,7 +42,6 @@ const Header = () => {
       format: formattedWords.join(""),
     };
   });
-  console.log({ formattedPathSegments });
   return (
     <div
       className="d-flex flex-row align-items-center justify-content-between header px-3 px-md-4"

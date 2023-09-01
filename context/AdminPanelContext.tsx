@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useWindowSize from "@/hooks/useWindowSize";
 import { CategoriesType, ProductsType, UsersType } from "@/utils/types";
 type ContextType = {
@@ -23,6 +23,7 @@ type ContextType = {
   setUpdater: React.Dispatch<React.SetStateAction<boolean>>;
   setType: React.Dispatch<React.SetStateAction<string>>;
   setUserInfo: React.Dispatch<React.SetStateAction<UsersType>>;
+  getUserData: (email: string) => void;
 };
 const AdminPanelContext = React.createContext<ContextType>({
   show: false,
@@ -55,12 +56,13 @@ const AdminPanelContext = React.createContext<ContextType>({
     id: 0,
     email: "",
     password: "",
-    profilepic: "",
+    profilePic: "",
     fullname: "",
-    birthday: "",
+    birthday: 0,
     gender: "",
   },
   setUserInfo: () => {},
+  getUserData: () => {},
 });
 export default AdminPanelContext;
 
@@ -72,13 +74,13 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
   children,
 }) => {
   const [userInfo, setUserInfo] = useState({
-    id: 1,
-    email: "moshtaghi.he@gmail.com",
-    password: "hhhh7980",
-    profilepic: "",
+    id: 0,
+    email: "",
+    password: "",
+    profilePic: "",
     fullname: "",
-    birthday: "",
-    gender: "",
+    birthday: 0,
+    gender: "-1",
   });
   const [show, setShow] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
@@ -104,6 +106,19 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
       : undefined;
   // windowSize.width !== undefined ? windowSize.width : window.innerWidth;
   const path = usePathname();
+  const getUserData = async (email: string) => {
+    const response = await fetch(
+      `http://localhost:8000/users/?email_like=${email}`,
+      {
+        method: "get", // Use PATCH to update specific fields
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    setUserInfo(data[0]);
+  };
 
   return (
     <AdminPanelContext.Provider
@@ -127,6 +142,7 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
         setIsModalAddandEditOpen,
         userInfo,
         setUserInfo,
+        getUserData,
       }}
     >
       <div

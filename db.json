@@ -3,11 +3,11 @@
     {
       "email": "moshtaghi.he@gmail.com",
       "password": "hhhh7980",
-      "profilepic": "",
-      "fullname": "",
-      "birthday": "",
-      "gender": "",
-      "id": 1
+      "fullname": "Hedieh Moshatghi",
+      "birthday": 1694603960,
+      "gender": "1",
+      "id": 1,
+      "profilePic": ""
     }
   ],
   "products": [
@@ -92,51 +92,6 @@
       "name": "temp",
       "color": "#FFCD56",
       "id": 13
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 14
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 15
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 17
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 18
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 19
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 20
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 21
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 22
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 23
     },
     {
       "name": "category 112",

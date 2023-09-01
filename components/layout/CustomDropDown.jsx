@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import Chevron from "../../public/assets/icons/Chevron.svg";
-import Edit from "../../public/assets/icons/Edit.svg";
-import Key from "../../public/assets/icons/Key Reset.svg";
-import SignOut from "../../public/assets/icons/Sign Out.svg";
-import profile from "../../public/assets/images/profile.svg";
+import Chevron from "@/public/assets/icons/Chevron.svg";
+import Edit from "@/public/assets/icons/Edit.svg";
+import Key from "@/public/assets/icons/Key Reset.svg";
+import SignOut from "@/public/assets/icons/Sign Out.svg";
+import profile from "@/public/assets/images/profile.svg";
 import Image from "next/image";
 import ColorSchema from "@/public/assets/kits/colors";
 import Link from "next/link";
@@ -80,8 +80,10 @@ const CustomDropDown = () => {
 
       <Dropdown.Menu as={CustomMenu}>
         <Dropdown.Item eventKey="1">
-          <Image src={Edit} alt="Edit" width={20} height={20} />
-          <span>Edit profile</span>
+          <Link href="/edit-profile">
+            <Image src={Edit} alt="Edit" width={20} height={20} />
+            <span>Edit profile</span>
+          </Link>
         </Dropdown.Item>
         <Dropdown.Item eventKey="2">
           <Link href="/change-password">

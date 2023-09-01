@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -10,6 +10,7 @@ import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
 import "../login-styles.scss";
 import ColorSchema from "@/public/assets/kits/colors";
 import { useRouter } from "next/navigation";
+import AdminPanelContext from "@/context/AdminPanelContext";
 type Inputs = {
   email: string;
   password: string;
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 };
 const SignIn = () => {
   const router = useRouter();
+  const { getUserData } = useContext(AdminPanelContext);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -56,6 +58,7 @@ const SignIn = () => {
       router.push("/", { scroll: false });
 
       setLoading(false);
+      getUserData(data.email);
       // Handle successful sign-in, such as setting user authentication
     } else if (falsePass) {
       toast.error("Email or password is wrong!", {
