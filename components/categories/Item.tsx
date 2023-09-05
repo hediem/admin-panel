@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { CategoriesType } from "@/utils/types";
+import AdminPanelContext from "@/context/AdminPanelContext";
 import Edit from "@/public/assets/icons/Edit.svg";
 import Delete from "@/public/assets/icons/Delete.svg";
-import Image from "next/image";
-import ColorSchema from "@/public/assets/kits/colors";
-import AdminPanelContext from "@/context/AdminPanelContext";
-import Link from "next/link";
 const Item = ({ item }: { item: CategoriesType }) => {
   const { setIsModalDeleteOpen, setShowBackDrop, setSelectedItem, setType } =
     useContext(AdminPanelContext);

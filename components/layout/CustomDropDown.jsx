@@ -1,15 +1,17 @@
 "use client";
 import React, { useContext, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import Dropdown from "react-bootstrap/Dropdown";
+import AdminPanelContext from "@/context/AdminPanelContext";
+
 import Chevron from "@/public/assets/icons/Chevron.svg";
 import Edit from "@/public/assets/icons/Edit.svg";
 import Key from "@/public/assets/icons/Key Reset.svg";
 import SignOut from "@/public/assets/icons/Sign Out.svg";
 import profile from "@/public/assets/images/profile.svg";
-import Image from "next/image";
+
 import ColorSchema from "@/public/assets/kits/colors";
-import Link from "next/link";
-import AdminPanelContext from "@/context/AdminPanelContext";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu

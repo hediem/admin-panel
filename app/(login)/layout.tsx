@@ -1,8 +1,11 @@
-import Image from "next/image";
 import React from "react";
-import logo from "../../public/assets/images/Symis.png";
-import headerImage from "../../public/assets/images/image-header.svg";
+import Image from "next/image";
+
 import ColorSchema from "@/public/assets/kits/colors";
+
+import logo from "@/public/assets/images/Symis.png";
+import headerImage from "@/public/assets/images/image-header.svg";
+
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="row">

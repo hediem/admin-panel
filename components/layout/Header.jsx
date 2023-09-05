@@ -10,11 +10,11 @@ import { AiOutlineMenu } from "react-icons/ai";
 import CustomDropDown from "./CustomDropDown";
 import SideBar from "./SideBar";
 
-import logo from "../../public/assets/images/Symis.png";
-import logoLight from "../../public/assets/images/Symis light.png";
-import logoLightText from "../../public/assets/images/Symis light text.png";
-import profile from "../../public/assets/images/profile.svg";
-import close from "../../public/assets/icons/Dismiss.svg";
+import logo from "@/public/assets/images/Symis.png";
+import logoLight from "@/public/assets/images/Symis light.png";
+import logoLightText from "@/public/assets/images/Symis light text.png";
+import profile from "@/public/assets/images/profile.svg";
+import close from "@/public/assets/icons/Dismiss.svg";
 
 import "./layout.scss";
 import Link from "next/link";

@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import { ProductsType } from "@/utils/types";
+import Image from "next/image";
+import addCommas from "@/utils/addCommas";
 import Edit from "@/public/assets/icons/Edit.svg";
 import Delete from "@/public/assets/icons/Delete.svg";
-import Image from "next/image";
 import AdminPanelContext from "@/context/AdminPanelContext";
-import Link from "next/link";
-import addCommas from "@/utils/addCommas";
 const Item = ({ item }: { item: ProductsType }) => {
   const {
     setIsModalDeleteOpen,

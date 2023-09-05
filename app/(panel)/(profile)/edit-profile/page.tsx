@@ -1,18 +1,21 @@
 // @ts-nocheck
 "use client";
-import Image from "next/image";
 import React, { useContext, useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+
 import arrow from "@/public/assets/icons/Arrow.svg";
 import cloud from "@/public/assets/icons/Cloud Arrow Up.svg";
 import profile from "@/public/assets/images/profile.svg";
 
-import { useRouter } from "next/navigation";
-import { ToastContainer, toast } from "react-toastify";
-import "../profile.scss";
 import AdminPanelContext from "@/context/AdminPanelContext";
 import ColorSchema from "@/public/assets/kits/colors";
+
 import DatePicker from "react-multi-date-picker";
 import type { Value } from "react-multi-date-picker";
+
+import "../profile.scss";
 
 function CustomInput({
   onFocus,

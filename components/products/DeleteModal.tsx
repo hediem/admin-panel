@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import AdminPanelContext from "@/context/AdminPanelContext";
 import Image from "next/image";
+import AdminPanelContext from "@/context/AdminPanelContext";
 import close from "@/public/assets/icons/close-Icon.svg";
 const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
   const {

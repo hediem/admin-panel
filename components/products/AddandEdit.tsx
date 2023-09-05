@@ -1,10 +1,10 @@
-import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
-import AdminPanelContext from "@/context/AdminPanelContext";
-import close from "@/public/assets/icons/close-Icon.svg";
+import Image from "next/image";
 import CustomSelect from "../common/CustomSelect";
 import { CategoryOptions, ProductFormData } from "@/utils/types";
 import addCommas from "@/utils/addCommas";
+import AdminPanelContext from "@/context/AdminPanelContext";
+import close from "@/public/assets/icons/close-Icon.svg";
 
 const AddandEdit = ({
   submit,

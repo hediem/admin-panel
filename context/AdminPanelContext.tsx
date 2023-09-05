@@ -1,6 +1,6 @@
 "use client";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
 import useWindowSize from "@/hooks/useWindowSize";
 import { CategoriesType, ProductsType, UsersType } from "@/utils/types";
 type ContextType = {

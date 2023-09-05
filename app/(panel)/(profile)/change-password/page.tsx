@@ -1,12 +1,12 @@
 "use client";
-import Image from "next/image";
 import React, { useContext, useState } from "react";
-import arrow from "@/public/assets/icons/Arrow.svg";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import "../profile.scss";
-import AdminPanelContext from "@/context/AdminPanelContext";
-
 import { ToastContainer, toast } from "react-toastify";
+import arrow from "@/public/assets/icons/Arrow.svg";
+import AdminPanelContext from "@/context/AdminPanelContext";
+import "../profile.scss";
+
 const ChangePassword = () => {
   const router = useRouter();
   const { userInfo } = useContext(AdminPanelContext);

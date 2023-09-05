@@ -1,11 +1,13 @@
 import Image from "next/image";
 import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
+
+import AdminPanelContext from "@/context/AdminPanelContext";
+import { CategoryFormData } from "@/utils/types";
+
 import ColorPicker from "@/components/common/ColorPicker";
 import checkmark from "@/public/assets/icons/Checkmark.svg";
 import arrow from "@/public/assets/icons/Arrow.svg";
-import AdminPanelContext from "@/context/AdminPanelContext";
-import { CategoryFormData, ColorObjectType } from "@/utils/types";
 
 const AddandEdit = ({
   submit,

@@ -2,15 +2,15 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
 
-import "../login-styles.scss";
 import ColorSchema from "@/public/assets/kits/colors";
-import { useRouter } from "next/navigation";
 import AdminPanelContext from "@/context/AdminPanelContext";
+import "../login-styles.scss";
 type Inputs = {
   email: string;
   password: string;

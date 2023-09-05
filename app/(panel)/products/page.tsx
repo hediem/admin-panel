@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import React, { useEffect, useState, useContext, useRef } from "react";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import debounce from "lodash.debounce";
@@ -18,9 +19,8 @@ import AdminPanelContext from "@/context/AdminPanelContext";
 
 import Add from "@/public/assets/icons/Add.svg";
 import search from "@/public/assets/icons/Search-icon.svg";
-import "./products.scss";
 import AddandEdit from "@/components/products/AddandEdit";
-import { useRouter } from "next/navigation";
+import "./products.scss";
 
 export const metadata: Metadata = {
   title: "Products",

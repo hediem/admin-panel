@@ -1,11 +1,11 @@
 import ColorSchema from "@/public/assets/kits/colors";
 import React from "react";
-import Frame from "../../public/assets/icons/Frame.svg";
-import Linkedin from "../../public/assets/icons/Linkedin.svg";
-import GitHub from "../../public/assets/icons/GitHub.svg";
-import Twitter from "../../public/assets/icons/Twitter.svg";
 import Image from "next/image";
 import Link from "next/link";
+import Frame from "@/public/assets/icons/Frame.svg";
+import Linkedin from "@/public/assets/icons/Linkedin.svg";
+import GitHub from "@/public/assets/icons/GitHub.svg";
+import Twitter from "@/public/assets/icons/Twitter.svg";
 const Footer = () => {
   return (
     <div

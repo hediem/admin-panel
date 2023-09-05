@@ -1,7 +1,7 @@
-import ColorSchema from "@/public/assets/kits/colors";
 import React from "react";
 import { ChromePicker } from "react-color";
 import { AiOutlineClose } from "react-icons/ai";
+import ColorSchema from "@/public/assets/kits/colors";
 const ColorPicker = ({
   onChange,
   handleColorClose,

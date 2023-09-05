@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Accordion } from "react-bootstrap";
-import Home from "../../public/assets/icons/Home.svg";
-import Tag from "../../public/assets/icons/Tag.svg";
-import Arrow from "../../public/assets/icons/Arrow-down.svg";
 import Image from "next/image";
 import Link from "next/link";
-import AdminPanelContext from "@/context/AdminPanelContext";
 import { usePathname } from "next/navigation";
+import { Accordion } from "react-bootstrap";
+import Home from "@/public/assets/icons/Home.svg";
+import Tag from "@/public/assets/icons/Tag.svg";
+import Arrow from "@/public/assets/icons/Arrow-down.svg";
+import AdminPanelContext from "@/context/AdminPanelContext";
 const SideBar = () => {
   const { width, show, setShow } = useContext(AdminPanelContext);
   const path = usePathname();

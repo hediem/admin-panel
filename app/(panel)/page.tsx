@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./home.scss";
 import AnalysisCard from "@/components/home/AnalysisCard";
+import "./home.scss";
 export default function Home() {
   const [categoriesNumber, setCategoriesNumber] = useState(0);
   const [productsNumber, setProductsNumber] = useState(0);

@@ -1,12 +1,13 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
+import Image from "next/image";
 import { CategoriesType } from "@/utils/types";
+
 import Item from "./Item";
+import CustomPagination from "../common/Pagination";
+import AdminPanelContext from "@/context/AdminPanelContext";
 import ColorSchema from "@/public/assets/kits/colors";
 import arrow from "@/public/assets/icons/Arrow-up.svg";
-import CustomPagination from "../common/Pagination";
-import Image from "next/image";
-import AdminPanelContext from "@/context/AdminPanelContext";
 const CategoriesTable = ({
   categories,
   currentPage,
