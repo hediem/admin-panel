@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Metadata } from "next";
 import { useRouter } from "next/navigation";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -19,9 +18,6 @@ type Users = {
   email: string;
   password: string;
   id: string;
-};
-export const metadata: Metadata = {
-  title: "Sign up",
 };
 
 const SignUp = () => {
