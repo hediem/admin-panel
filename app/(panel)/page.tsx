@@ -1,13 +1,34 @@
-import ColorSchema from "@/public/assets/kits/colors";
-
+"use client";
+import { useEffect, useState } from "react";
+import "./home.scss";
+import AnalysisCard from "@/components/home/AnalysisCard";
 export default function Home() {
+  const [categoriesNumber, setCategoriesNumber] = useState(0);
+  const [productsNumber, setProductsNumber] = useState(0);
+  const getCategories = async () => {
+    const responseCategory = await fetch(`http://localhost:8000/categories`, {
+      method: "GET",
+    });
+    const categories = await responseCategory.json();
+    setCategoriesNumber(categories.length);
+  };
+  const getProducts = async () => {
+    const responseCategory = await fetch(`http://localhost:8000/products`, {
+      method: "GET",
+    });
+    const products = await responseCategory.json();
+    setProductsNumber(products.length);
+  };
+  useEffect(() => {
+    getProducts();
+    getCategories();
+  }, []);
   return (
-    <div>
-      <h1
-        style={{ color: ColorSchema.error_background_fill, marginTop: "30px" }}
-      >
-        Hello World
-      </h1>
+    <div className="home">
+      <div className="cards">
+        <AnalysisCard number={productsNumber} text={"Total Products"} />
+        <AnalysisCard number={categoriesNumber} text={"Categories"} />
+      </div>
     </div>
   );
 }

@@ -49,10 +49,8 @@ const SideBar = () => {
             </Accordion.Header>
             <Accordion.Body>
               <Link
-                href={"/analysis"}
-                className={`body-item ${
-                  path.includes("analysis") && "selected"
-                }`}
+                href={"/"}
+                className={`body-item ${path === "/" && "selected"}`}
               >
                 Analysis
               </Link>
