@@ -67,9 +67,6 @@ const CustomMenu = React.forwardRef(
           </div>
           <div className="description col-6">
             <div className="name">{userInfo.fullname}</div>
-            <Link href={"https://github.com/hediem"} className="link">
-              github.com/hediem
-            </Link>
           </div>
         </div>
         <hr />
