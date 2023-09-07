@@ -217,7 +217,7 @@ const EditProfile = () => {
             type="radio"
             name="gender"
             value="male"
-            checked={userInfo.gender === "0" && true}
+            checked={profileData.gender === "0" && true}
             onChange={(e) => {
               setProfileData((prevData) => ({
                 ...prevData,
@@ -232,7 +232,7 @@ const EditProfile = () => {
             type="radio"
             name="gender"
             value="female"
-            checked={userInfo.gender === "1" && true}
+            checked={profileData.gender === "1" && true}
             onChange={(e) => {
               setProfileData((prevData) => ({
                 ...prevData,
@@ -247,7 +247,7 @@ const EditProfile = () => {
             type="radio"
             name="gender"
             value="other"
-            checked={userInfo.gender === "2" && true}
+            checked={profileData.gender === "2" && true}
             onChange={(e) => {
               setProfileData((prevData) => ({
                 ...prevData,

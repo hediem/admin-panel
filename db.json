@@ -3,11 +3,20 @@
     {
       "email": "moshtaghi.he@gmail.com",
       "password": "hhhh7980",
-      "fullname": "Hedieh Moshtaghi",
-      "birthday": 1694603960,
-      "gender": "2",
+      "fullname": "Hedieh Mosh",
+      "birthday": 976879160,
+      "gender": "1",
       "id": 1,
       "profilePic": null
+    },
+    {
+      "email": "smhkh@gmail.com",
+      "password": "79807980",
+      "profilePic": "",
+      "fullname": "",
+      "birthday": 0,
+      "gender": "-1",
+      "id": 2
     }
   ],
   "products": [

@@ -68,20 +68,24 @@ export default AdminPanelContext;
 
 interface AdminPanelProviderProps {
   children: React.ReactNode;
+  previousInfo?: UsersType;
 }
 
 export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
   children,
+  previousInfo,
 }) => {
-  const [userInfo, setUserInfo] = useState({
-    id: 0,
-    email: "",
-    password: "",
-    profilePic: "",
-    fullname: "",
-    birthday: 0,
-    gender: "-1",
-  });
+  const [userInfo, setUserInfo] = useState(
+    previousInfo ?? {
+      id: 0,
+      email: "",
+      password: "",
+      profilePic: "",
+      fullname: "",
+      birthday: 0,
+      gender: "-1",
+    }
+  );
   const [show, setShow] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [isModalAddandEditOpen, setIsModalAddandEditOpen] = useState(false);
@@ -110,7 +114,7 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
     const response = await fetch(
       `http://localhost:8000/users/?email_like=${email}`,
       {
-        method: "get", // Use PATCH to update specific fields
+        method: "get",
         headers: {
           "Content-Type": "application/json",
         },

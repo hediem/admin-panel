@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
+import cookies from "js-cookie";
 import Link from "next/link";
 import Dropdown from "react-bootstrap/Dropdown";
 import AdminPanelContext from "@/context/AdminPanelContext";
@@ -12,6 +13,7 @@ import SignOut from "@/public/assets/icons/Sign Out.svg";
 import profile from "@/public/assets/images/profile.svg";
 
 import ColorSchema from "@/public/assets/kits/colors";
+import { redirect, useRouter } from "next/navigation";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -70,6 +72,11 @@ const CustomMenu = React.forwardRef(
 );
 
 const CustomDropDown = () => {
+  const router = useRouter();
+  const logout = () => {
+    cookies.remove("token");
+    redirect("/sign-in");
+  };
   return (
     <Dropdown>
       <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
@@ -98,6 +105,7 @@ const CustomDropDown = () => {
         <Dropdown.Item
           eventKey="3"
           style={{ color: ColorSchema.status_severe_warning_type_icon }}
+          onClick={logout}
         >
           <Image src={SignOut} alt="SignOut" width={20} height={20} />
           <span>sign out</span>

@@ -32,7 +32,7 @@ const Header = () => {
   const path = usePathname();
   const pathSegments = path.split("/");
   const links = [];
-  const formattedPathSegments = pathSegments.map((segment, index) => {
+  const formattedPathSegments = pathSegments.map((segment) => {
     const words = segment.split("-");
     const formattedWords = words.map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1);

@@ -1,12 +1,17 @@
 import React from "react";
 import Image from "next/image";
-
+import { cookies } from "next/headers";
 import ColorSchema from "@/public/assets/kits/colors";
 
 import logo from "@/public/assets/images/Symis.png";
 import headerImage from "@/public/assets/images/image-header.svg";
+import { redirect } from "next/navigation";
+import { RedirectType } from "next/dist/client/components/redirect";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
+  if (cookies().has("token")) {
+    redirect("/", RedirectType.replace);
+  }
   return (
     <div className="row">
       <div className="d-md-none">

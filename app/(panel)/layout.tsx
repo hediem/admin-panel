@@ -3,8 +3,15 @@ import React, { useContext } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdminPanelContext from "@/context/AdminPanelContext";
+import { redirect } from "next/navigation";
+import { RedirectType } from "next/dist/client/components/redirect";
 const layout = ({ children }: { children: React.ReactNode }) => {
-  const { show, width, showBackDrop } = useContext(AdminPanelContext);
+  const { show, width, showBackDrop, userInfo } = useContext(AdminPanelContext);
+
+  if (userInfo.id === 0) {
+    redirect("/sign-in", RedirectType.replace);
+  }
+
   return (
     <>
       <Header />

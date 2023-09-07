@@ -1,14 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import cookies from "js-cookie";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
 
 import ColorSchema from "@/public/assets/kits/colors";
 import "../login-styles.scss";
+import Encryption from "@/utils/generateToken";
+import AdminPanelContext from "@/context/AdminPanelContext";
 
 type Inputs = {
   email: string;
@@ -22,6 +24,7 @@ type Users = {
 
 const SignUp = () => {
   const router = useRouter();
+  const { getUserData, setUserInfo } = useContext(AdminPanelContext);
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
 
@@ -39,11 +42,17 @@ const SignUp = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data.email, password: data.password }),
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+        profilePic: "",
+        fullname: "",
+        birthday: 0,
+        gender: "-1",
+      }),
     });
-    // const token = generateToken(data);
     if (response.ok) {
-      // localStorage.setItem("token", token);
+      let data = await response.json();
       toast.success("Sign up successful", {
         position: "top-center",
         autoClose: 3000,
@@ -54,8 +63,10 @@ const SignUp = () => {
         progress: undefined,
         theme: "light",
       });
+      const token = Encryption.generateToken(data.id);
+      cookies.set("token", token, { expires: 7 });
       router.push("/", { scroll: false });
-      // Handle successful sign-up, such as redirecting to another page
+      getUserData(data.email);
     } else {
       toast.error("Sign up failed", {
         position: "top-center",
@@ -67,7 +78,6 @@ const SignUp = () => {
         progress: undefined,
         theme: "light",
       });
-      // Handle sign-up error
     }
   };
   const {

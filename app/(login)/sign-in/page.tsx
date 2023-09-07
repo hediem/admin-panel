@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
+import cookies from "js-cookie";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
@@ -10,6 +10,7 @@ import { PiEyeClosed, PiEyeLight } from "react-icons/pi";
 import ColorSchema from "@/public/assets/kits/colors";
 import AdminPanelContext from "@/context/AdminPanelContext";
 import "../login-styles.scss";
+import Encryption from "@/utils/generateToken";
 type Inputs = {
   email: string;
   password: string;
@@ -21,7 +22,7 @@ type Users = {
 };
 const SignIn = () => {
   const router = useRouter();
-  const { getUserData } = useContext(AdminPanelContext);
+  const { setUserInfo } = useContext(AdminPanelContext);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -37,10 +38,8 @@ const SignIn = () => {
     const falsePass = users.find(
       (u: Users) => u.email === data.email && u.password !== data.password
     );
-    // const token = generateToken(data);
 
     if (user) {
-      // localStorage.setItem("token", token);
       toast.success("Sign in successful", {
         position: "top-center",
         autoClose: 3000,
@@ -52,10 +51,10 @@ const SignIn = () => {
         theme: "light",
       });
       router.push("/", { scroll: false });
-
+      const token = Encryption.generateToken(user.id);
+      cookies.set("token", token, { expires: 7 });
       setLoading(false);
-      getUserData(data.email);
-      // Handle successful sign-in, such as setting user authentication
+      setUserInfo(user);
     } else if (falsePass) {
       toast.error("Email or password is wrong!", {
         position: "top-center",
@@ -80,8 +79,6 @@ const SignIn = () => {
         theme: "light",
       });
       setLoading(false);
-
-      // Handle sign-in error
     }
   };
   const {
