@@ -20,7 +20,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </div>
       <div
-        className="d-none d-md-flex d-xxl-none justify-content-between header p-4"
+        className="d-none d-md-flex d-xxl-none justify-content-between head p-4"
         style={{
           backgroundColor: ColorSchema.blue1,
           color: ColorSchema.background,

@@ -113,7 +113,7 @@ const SignUp = () => {
   };
   return (
     <div className="login">
-      <div className="header">Sign Up</div>
+      <div className="head">Sign Up</div>
       <div className="form-group">
         <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
           <div className="inputs">

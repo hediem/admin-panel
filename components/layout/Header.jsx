@@ -14,6 +14,9 @@ import logo from "@/public/assets/images/Symis.png";
 import logoLight from "@/public/assets/images/Symis light.png";
 import logoLightText from "@/public/assets/images/Symis light text.png";
 import profile from "@/public/assets/images/profile.svg";
+import maleUser from "@/public/assets/images/male user.png";
+import femaleUser from "@/public/assets/images/female user.png";
+
 import close from "@/public/assets/icons/Dismiss.svg";
 
 import "./layout.scss";
@@ -115,12 +118,23 @@ const Header = () => {
       >
         <div className="pro-parent small">
           <div className="profile small">
-            <Image src={profile.src} alt="profile" width={28} height={28} />
+            <Image
+              src={
+                +userInfo.gender === 0
+                  ? maleUser.src
+                  : +userInfo.gender === 1
+                  ? femaleUser.src
+                  : profile.src
+              }
+              alt="profile"
+              width={28}
+              height={28}
+            />
           </div>
         </div>
 
         <span style={{ fontSize: "10px", color: ColorSchema.grey160 }}>
-          {userInfo.fullname}
+          {userInfo.fullname !== "" ? userInfo.fullname : "User profile"}
         </span>
         <CustomDropDown />
       </div>

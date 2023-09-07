@@ -3,19 +3,19 @@
     {
       "email": "moshtaghi.he@gmail.com",
       "password": "hhhh7980",
-      "fullname": "Hedieh Mosh",
+      "fullname": "Hedieh Moshtaghi",
       "birthday": 976879160,
       "gender": "1",
       "id": 1,
-      "profilePic": null
+      "profilePic": {}
     },
     {
       "email": "smhkh@gmail.com",
       "password": "79807980",
-      "profilePic": "",
-      "fullname": "",
-      "birthday": 0,
-      "gender": "-1",
+      "profilePic": null,
+      "fullname": "Mohammad Hossein Kiahosseini",
+      "birthday": 1694092949,
+      "gender": "0",
       "id": 2
     }
   ],

@@ -11,9 +11,11 @@ import Edit from "@/public/assets/icons/Edit.svg";
 import Key from "@/public/assets/icons/Key Reset.svg";
 import SignOut from "@/public/assets/icons/Sign Out.svg";
 import profile from "@/public/assets/images/profile.svg";
+import maleUser from "@/public/assets/images/male user.png";
+import femaleUser from "@/public/assets/images/female user.png";
 
 import ColorSchema from "@/public/assets/kits/colors";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -48,7 +50,18 @@ const CustomMenu = React.forwardRef(
           <div className="col-3">
             <div className="pro-parent big">
               <div className="profile big">
-                <Image src={profile.src} alt="profile" width={48} height={48} />
+                <Image
+                  src={
+                    +userInfo.gender === 0
+                      ? maleUser.src
+                      : +userInfo.gender === 1
+                      ? femaleUser.src
+                      : profile.src
+                  }
+                  alt="profile"
+                  width={48}
+                  height={48}
+                />
               </div>
             </div>
           </div>
@@ -75,7 +88,7 @@ const CustomDropDown = () => {
   const router = useRouter();
   const logout = () => {
     cookies.remove("token");
-    redirect("/sign-in");
+    router.push("/sign-in");
   };
   return (
     <Dropdown>

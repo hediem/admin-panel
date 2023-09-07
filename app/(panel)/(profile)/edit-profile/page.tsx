@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import arrow from "@/public/assets/icons/Arrow.svg";
 import cloud from "@/public/assets/icons/Cloud Arrow Up.svg";
 import profile from "@/public/assets/images/profile.svg";
+import maleUser from "@/public/assets/images/male user.png";
+import femaleUser from "@/public/assets/images/female user.png";
 
 import AdminPanelContext from "@/context/AdminPanelContext";
 import ColorSchema from "@/public/assets/kits/colors";
@@ -45,6 +47,7 @@ const EditProfile = () => {
   const { userInfo, getUserData } = useContext(AdminPanelContext);
   const [birthDate, setBirthDate] = useState<Value>(userInfo.birthday * 1000);
   const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [profileData, setProfileData] = useState({
     fullname: userInfo.fullname,
     birthday: userInfo.birthday,
@@ -63,8 +66,25 @@ const EditProfile = () => {
     }
   };
 
+  //This function is just to set and show preview , and because of doensn't have any database in this project the data isn't set for user
   const handleFileChange = (e: any) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      // Use FileReader to read the file and generate a preview
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setPreview(reader.result); // Set the preview URL
+      };
+
+      reader.readAsDataURL(selectedFile); // Read the file as a data URL
+    } else {
+      setFile(null);
+      setPreview(null);
+    }
   };
 
   const editProfile = async (e: any) => {
@@ -149,7 +169,21 @@ const EditProfile = () => {
         className="d-flex justify-content-start align-items-center col-md-6 col-xl-5"
         style={{ gap: "12px" }}
       >
-        <Image src={profile.src} alt="profile" width={48} height={48} />
+        <Image
+          src={
+            preview !== null
+              ? preview
+              : +userInfo.gender === 0
+              ? maleUser.src
+              : +userInfo.gender === 1
+              ? femaleUser.src
+              : profile.src
+          }
+          alt="profile"
+          width={48}
+          height={48}
+          style={{ borderRadius: "30px" }}
+        />
         <div style={{ fontSize: "12px", color: ColorSchema.grey110 }}>
           {userInfo.fullname}
         </div>
