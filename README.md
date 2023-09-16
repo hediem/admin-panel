@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, if you want to run the development server:
 
 ```bash
 npm run dev
@@ -11,12 +11,18 @@ yarn dev
 # or
 pnpm dev
 ```
+If you want to run the Node.js server:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+First:
+```bash
+npm run build
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+and then run:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run start
+```
 
 Create a JSON Server to access data:
 
@@ -24,7 +30,9 @@ Create a JSON Server to access data:
 json-server --watch db.json --port 8000
 ```
 
-Next.js application is running at http://localhost:3000, and you can access your JSON Server at http://localhost:8000.
+Next.js application runs at http://localhost:3000, and you can access your JSON Server at http://localhost:8000.
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More
 
