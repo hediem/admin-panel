@@ -1,24 +1,5 @@
 {
-  "users": [
-    {
-      "email": "moshtaghi.he@gmail.com",
-      "password": "hhhh7980",
-      "fullname": "Hedieh Moshtaghi",
-      "birthday": 976879160,
-      "gender": "1",
-      "id": 1,
-      "profilePic": {}
-    },
-    {
-      "email": "smhkh@gmail.com",
-      "password": "79807980",
-      "profilePic": null,
-      "fullname": "Mohammad Hossein Kiahosseini",
-      "birthday": 1694092949,
-      "gender": "0",
-      "id": 2
-    }
-  ],
+  "users": [],
   "products": [
     {
       "name": "mobile",
@@ -31,7 +12,7 @@
       "id": 2
     },
     {
-      "name": "pffghjhgf",
+      "name": "book",
       "price": "485926",
       "category": {
         "name": "Category05",
