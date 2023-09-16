@@ -30,7 +30,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           <h4>Admin Panel</h4>
           <p>
             Admin Panel is a project template that provides common features such
-            as Sign-up & Sign-in.This template is powered by Hedieh Moshtaghi.
+            as Sign-up & Sign-in. This template is powered by Hedieh Moshtaghi.
           </p>
         </div>
         <Image src={headerImage} alt="headerImage" style={{ width: "100%" }} />
@@ -50,9 +50,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         />
         <div className="d-flex flex-column p-5 mt-3">
           <h3>Admin Panel</h3>
-          <p style={{ width: "65%" }}>
+          <p style={{ width: "70%" }}>
             Admin Panel is a project template that provides common features such
-            as Sign-up & Sign-in.This template is powered by Hedieh Moshtaghi.
+            as Sign-up & Sign-in. This template is powered by Hedieh Moshtaghi.
           </p>
         </div>
       </div>
