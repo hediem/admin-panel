@@ -98,7 +98,7 @@ const AddandEdit = ({
             style={{ cursor: "pointer" }}
           />
         </div>
-        <div className="products">
+        <div className="products product-modal">
           <div className="inputs">
             <label htmlFor="name">Name</label>
             <input

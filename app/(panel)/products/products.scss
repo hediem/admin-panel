@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  &.product-modal {
+    margin-top: 20px;
+  }
   .header {
     display: flex;
     align-items: center;
