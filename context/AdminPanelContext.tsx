@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import useWindowSize from "@/hooks/useWindowSize";
 import { CategoriesType, ProductsType, UsersType } from "@/utils/types";
@@ -124,6 +124,11 @@ export const AdminPanelContextProvider: React.FC<AdminPanelProviderProps> = ({
     setUserInfo(data[0]);
   };
 
+  useEffect(() => {
+    setIsModalAddandEditOpen(false);
+    setIsModalDeleteOpen(false);
+    setShowBackDrop(false);
+  }, [path]);
   return (
     <AdminPanelContext.Provider
       value={{

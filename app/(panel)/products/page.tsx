@@ -327,6 +327,7 @@ const products = () => {
             color: ColorSchema.white_0,
             border: "none",
             borderRadius: "2px",
+            cursor: "pointer",
           }}
           onClick={() => {
             setType("add");

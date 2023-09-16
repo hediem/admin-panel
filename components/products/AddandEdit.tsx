@@ -75,7 +75,6 @@ const AddandEdit = ({
       setFormattedPrice(addCommas(selectedProduct.price));
     }
   }, []);
-  console.log(!checkFormFill());
 
   return (
     <div className="bottom-modal">
@@ -96,6 +95,7 @@ const AddandEdit = ({
             width={24}
             height={24}
             onClick={reset}
+            style={{ cursor: "pointer" }}
           />
         </div>
         <div className="products">

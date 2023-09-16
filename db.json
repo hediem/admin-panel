@@ -31,16 +31,6 @@
       "id": 2
     },
     {
-      "name": "dfgh",
-      "price": "1595",
-      "category": {
-        "name": "Category03",
-        "color": "#51AEED",
-        "id": 3
-      },
-      "id": 3
-    },
-    {
       "name": "pffghjhgf",
       "price": "485926",
       "category": {
@@ -96,11 +86,6 @@
       "name": "Category10",
       "color": "#2B88D8",
       "id": 10
-    },
-    {
-      "name": "temp",
-      "color": "#FFCD56",
-      "id": 13
     },
     {
       "name": "category 112",

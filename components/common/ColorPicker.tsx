@@ -23,7 +23,12 @@ const ColorPicker = ({
       }}
     >
       <div
-        style={{ position: "absolute", top: "0px", right: "8px" }}
+        style={{
+          position: "absolute",
+          top: "0px",
+          right: "8px",
+          cursor: "pointer",
+        }}
         onClick={handleColorClose}
       >
         <AiOutlineClose />

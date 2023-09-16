@@ -34,6 +34,7 @@ const DeleteModal = ({ deleteFunc }: { deleteFunc: () => void }) => {
               width={24}
               height={24}
               onClick={reset}
+              style={{ cursor: "pointer" }}
             />
           </div>
           <p>Are you sure you want to delete the {selectedItem?.name}?</p>

@@ -190,7 +190,10 @@ const EditProfile = () => {
       </div>
       <div className="inputs col-md-6 col-xl-5">
         <label htmlFor="profile">Profile photo</label>
-        <div className="file-input" style={{ position: "relative" }}>
+        <div
+          className="file-input"
+          style={{ position: "relative", cursor: "pointer" }}
+        >
           <span>
             <Image src={cloud} alt="cloud" width={20} height={20} />
           </span>
@@ -200,7 +203,7 @@ const EditProfile = () => {
             id="profile"
             placeholder="Upload a new profile photo"
             type="file"
-            value={profileData.profile}
+            // value={profileData.profile}
             onChange={handleFileChange}
           />
         </div>
