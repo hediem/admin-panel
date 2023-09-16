@@ -49,4 +49,8 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+UI template:
+https://www.figma.com/file/hjUtUQ8TFezrluizDgGoAf/Admin-Panel-Template-(Community)?type=design&node-id=183-24731&mode=design&t=RHhWh94QEzTII864-0
+
+
 ![Screenshot (52)](https://github.com/hediem/admin-panel/assets/91387399/ef2a6fa6-1513-4326-858b-c001b8d33624)
