@@ -181,7 +181,7 @@ const Header = () => {
             ""
           )}
         </div>
-        <hr />
+        {show ? <hr /> : ""}
 
         <SideBar />
       </div>

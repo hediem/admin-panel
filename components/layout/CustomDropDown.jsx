@@ -66,7 +66,9 @@ const CustomMenu = React.forwardRef(
             </div>
           </div>
           <div className="description col-6">
-            <div className="name">{userInfo.fullname}</div>
+            <div className="name">
+              {userInfo.fullname !== "" ? userInfo.fullname : "User profile"}
+            </div>
           </div>
         </div>
         <hr />

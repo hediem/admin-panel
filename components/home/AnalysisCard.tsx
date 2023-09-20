@@ -14,7 +14,7 @@ const AnalysisCard = ({ number, text }: { number: number; text: string }) => {
           fill="none"
           className="small-screen-svg"
         >
-          <g clip-path="url(#clip0_440_39905)">
+          <g clipPath="url(#clip0_440_39905)">
             <circle opacity="0.3" cx="71.5" cy="24.5" r="71.5" fill="#D0E4FF" />
             <ellipse
               opacity="0.3"
@@ -39,7 +39,7 @@ const AnalysisCard = ({ number, text }: { number: number; text: string }) => {
           fill="none"
           className="large-screen-svg"
         >
-          <g clip-path="url(#clip0_440_39022)">
+          <g clipPath="url(#clip0_440_39022)">
             <circle opacity="0.3" cx="117" cy="84" r="117" fill="#E5F0FF" />
             <circle
               opacity="0.3"
