@@ -169,7 +169,7 @@ const categories = () => {
         </span>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search category name"
           value={searchTerm}
           onChange={(e) => {
             if (e.target.value !== "") {

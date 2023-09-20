@@ -345,7 +345,7 @@ const products = () => {
         </span>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search product name"
           value={searchTerm}
           onChange={(e) => {
             if (e.target.value !== "") {

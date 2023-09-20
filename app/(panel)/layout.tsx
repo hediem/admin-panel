@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext } from "react";
+import Cookies from "js-cookie";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AdminPanelContext from "@/context/AdminPanelContext";
@@ -9,6 +10,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   const { show, width, showBackDrop, userInfo } = useContext(AdminPanelContext);
 
   if (userInfo.id === 0) {
+    Cookies.remove("token");
     redirect("/sign-in", RedirectType.replace);
   }
 
