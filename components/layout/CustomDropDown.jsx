@@ -85,6 +85,8 @@ const CustomMenu = React.forwardRef(
 
 const CustomDropDown = () => {
   const router = useRouter();
+  const { userInfo } = useContext(AdminPanelContext);
+
   const logout = () => {
     cookies.remove("token");
     router.push("/sign-in");
@@ -92,13 +94,38 @@ const CustomDropDown = () => {
   return (
     <Dropdown>
       <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        <Image
-          src={Chevron.src}
-          alt="Chevron"
-          width={12}
-          height={12}
-          style={{ cursor: "pointer" }}
-        />
+        <div
+          className="d-flex flex-row align-items-center"
+          style={{ gap: "4px" }}
+        >
+          <div className="pro-parent small">
+            <div className="profile small">
+              <Image
+                src={
+                  +userInfo.gender === 0
+                    ? maleUser.src
+                    : +userInfo.gender === 1
+                    ? femaleUser.src
+                    : profile.src
+                }
+                alt="profile"
+                width={28}
+                height={28}
+              />
+            </div>
+          </div>
+
+          <span style={{ fontSize: "10px", color: ColorSchema.grey160 }}>
+            {userInfo.fullname !== "" ? userInfo.fullname : "User profile"}
+          </span>
+          <Image
+            src={Chevron.src}
+            alt="Chevron"
+            width={12}
+            height={12}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
       </Dropdown.Toggle>
 
       <Dropdown.Menu as={CustomMenu}>

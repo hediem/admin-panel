@@ -112,30 +112,7 @@ const Header = () => {
           )}
         </Breadcrumb>
       </div>
-      <div
-        className="d-flex flex-row align-items-center"
-        style={{ gap: "4px" }}
-      >
-        <div className="pro-parent small">
-          <div className="profile small">
-            <Image
-              src={
-                +userInfo.gender === 0
-                  ? maleUser.src
-                  : +userInfo.gender === 1
-                  ? femaleUser.src
-                  : profile.src
-              }
-              alt="profile"
-              width={28}
-              height={28}
-            />
-          </div>
-        </div>
-
-        <span style={{ fontSize: "10px", color: ColorSchema.grey160 }}>
-          {userInfo.fullname !== "" ? userInfo.fullname : "User profile"}
-        </span>
+      <div>
         <CustomDropDown />
       </div>
 
